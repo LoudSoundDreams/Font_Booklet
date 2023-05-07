@@ -8,15 +8,15 @@
 import SwiftUI
 
 struct SampleList: View {
-    var body: some View {
+	var body: some View {
 		List((1..<4)) { number in
 			Text("The quick brown fox jumps over the lazy dog.")
 		}
-    }
+	}
 }
 
 struct SampleList_Previews: PreviewProvider {
-    static var previews: some View {
-        SampleList()
-    }
+	static var previews: some View {
+		SampleList()
+	}
 }

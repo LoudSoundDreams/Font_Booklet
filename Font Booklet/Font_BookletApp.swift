@@ -9,9 +9,9 @@ import SwiftUI
 
 @main
 struct Font_BookletApp: App {
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-        }
-    }
+	var body: some Scene {
+		WindowGroup {
+			ContentView()
+		}
+	}
 }
