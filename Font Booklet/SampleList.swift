@@ -8,16 +8,15 @@
 import SwiftUI
 
 struct SampleList: View {
-	private let fontNames: [String] = [
-		"Verdana",
-		"Futura",
-		"Helvetica",
-	]
-	
 	var body: some View {
-		List((1..<4)) { number in
-			Text("The quick brown fox jumps over the lazy dog.")
-				.font(.custom("Verdana", size: 64))
+		List(UIFont.familyNames, id: \.self) { familyName in
+			Text(
+				UIFont.fontNames(forFamilyName: familyName)
+					.reduce(familyName) { partialResult, fontName in
+						partialResult + " & " + fontName
+					}
+			)
+			.font(.custom(familyName, size: 32))
 		}
 	}
 }
