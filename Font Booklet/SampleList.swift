@@ -8,9 +8,16 @@
 import SwiftUI
 
 struct SampleList: View {
+	private let fontNames: [String] = [
+		"Verdana",
+		"Futura",
+		"Helvetica",
+	]
+	
 	var body: some View {
 		List((1..<4)) { number in
 			Text("The quick brown fox jumps over the lazy dog.")
+				.font(.custom("Verdana", size: 64))
 		}
 	}
 }
