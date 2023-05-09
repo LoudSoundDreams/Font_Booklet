@@ -8,20 +8,20 @@
 import SwiftUI
 
 struct SampleList: View {
-	private static let familiesAndMembers: [[String]] = {
+	private static let familiesAndFaces: [[String]] = {
 		let families = UIFont.familyNames // ["Verdana", "Futura"]
 		return families.map { family in
 			return UIFont.fontNames(forFamilyName: family) // ["Verdana", "Verdana-Bold"]
 		}
 	}()
-	private static let members: [String] = familiesAndMembers.flatMap { $0 }
+	private static let faces: [String] = familiesAndFaces.flatMap { $0 }
 	
 	var body: some View {
-		List(Self.members, id: \.self) { fontName in
+		List(Self.faces, id: \.self) { faceName in
 			VStack(alignment: .leading) {
 				Text("The quick brown fox jumps over the lazy dog.")
-					.font(.custom(fontName, size: 32))
-				Text(fontName)
+					.font(.custom(faceName, size: 32))
+				Text(faceName)
 					.font(.caption)
 					.foregroundColor(.secondary)
 			}
