@@ -26,6 +26,14 @@ struct SampleList: View {
 					.foregroundColor(.secondary)
 			}
 		}
+		.toolbar {
+			ToolbarItem(placement: .bottomBar) {
+				Button {
+				} label: {
+					Image(systemName: "character.cursor.ibeam")
+				}
+			}
+		}
 	}
 }
 
