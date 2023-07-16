@@ -16,6 +16,8 @@ struct SampleList: View {
 	}()
 	private static let faces: [String] = familiesAndFaces.flatMap { $0 }
 	
+	@State private var isEditingPreviewText = false
+	@State private var previewText = "preview text"
 	var body: some View {
 		List(Self.faces, id: \.self) { faceName in
 			VStack(alignment: .leading) {
@@ -29,10 +31,23 @@ struct SampleList: View {
 		.toolbar {
 			ToolbarItem(placement: .bottomBar) {
 				Button {
+					isEditingPreviewText = true
 				} label: {
 					Image(systemName: "character.cursor.ibeam")
 				}
 			}
+		}
+		.alert(
+			"Edit Preview Text", // !
+			isPresented: $isEditingPreviewText,
+			presenting: previewText
+		) { text in
+			Button {
+			} label: {
+				Text("actions: \(text)")
+			}
+		} message: { text in
+			Text("message: \(text)")
 		}
 	}
 }
