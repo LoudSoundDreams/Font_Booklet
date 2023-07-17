@@ -17,11 +17,12 @@ struct SampleList: View {
 	private static let faces: [String] = familiesAndFaces.flatMap { $0 }
 	
 	@State private var isEditingPreviewText = false
-	@State private var previewText = "preview text"
+	@State private var previewText = Self.defaultPangram
+	private static let defaultPangram = "The quick brown fox jumps over the lazy dog."
 	var body: some View {
 		List(Self.faces, id: \.self) { faceName in
 			VStack(alignment: .leading) {
-				Text("The quick brown fox jumps over the lazy dog.")
+				Text(previewText)
 					.font(.custom(faceName, size: 32))
 				Text(faceName)
 					.font(.caption)
@@ -38,16 +39,27 @@ struct SampleList: View {
 			}
 		}
 		.alert(
-			"Edit Preview Text", // !
+			"Sample Text", // !
 			isPresented: $isEditingPreviewText,
 			presenting: previewText
 		) { text in
-			Button {
-			} label: {
-				Text("actions: \(text)")
+			TextField(
+				text: $previewText,
+				prompt: Text(previewText)
+			) {
+				let _ = UITextField.appearance().clearButtonMode = .whileEditing
 			}
-		} message: { text in
-			Text("message: \(text)")
+			
+			Button("Pangram!") { // !
+				previewText = "Amazingly few discotheques provide jukeboxes. \(Int.random(in: 1...100))"
+			}
+			
+			Button("Done") { // !
+				if previewText.isEmpty {
+					previewText = Self.defaultPangram
+				}
+			}
+			.keyboardShortcut(.defaultAction)
 		}
 	}
 }
