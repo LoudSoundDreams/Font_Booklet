@@ -40,17 +40,10 @@ struct SampleList: View {
 	@ObservedObject private var fontsObservable: FontsObservable = .shared
 	@State private var sample = Pangrams.standard
 	@State private var isEditingSample = false
-	
-	private enum Filter: CaseIterable, Identifiable {
-		var id: Self { self }
-		
-		case all
-		case bookmarked
-	}
-	@State private var filter: Filter = .all
+	@State private var showingBookmarkedOnly = false
 	var body: some View {
 		NavigationStack {
-			let visibleFaces: [String] = (filter == .bookmarked)
+			let visibleFaces: [String] = showingBookmarkedOnly
 			? Fonts.faceNames.filter { fontsObservable.bookmarked.contains($0) }
 			: Fonts.faceNames
 			
@@ -108,24 +101,25 @@ struct SampleList: View {
 				}
 				
 				ToolbarItem(placement: .bottomBar) {
-					filterPicker
+					if showingBookmarkedOnly {
+						filterButton
+							.buttonStyle(.borderedProminent)
+					} else {
+						filterButton
+							.buttonStyle(.bordered)
+					}
 				}
 			}
 		}
 	}
 	
-	private var filterPicker: some View {
-		Picker("", selection: $filter) {
-			ForEach(Filter.allCases) { filter in
-				switch filter {
-					case .all:
-						Image(systemName: "line.3.horizontal")
-					case .bookmarked:
-						Image(systemName: "bookmark.fill")
-				}
-			}
+	private var filterButton: some View {
+		Button {
+			showingBookmarkedOnly.toggle()
+		} label: {
+			Image(systemName: "bookmark")
 		}
-		.pickerStyle(.segmented)
+		.tint(.red)
 	}
 	
 	private var editSampleTextField: some View {
