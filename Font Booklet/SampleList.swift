@@ -38,8 +38,8 @@ final class FontsObservable: ObservableObject {
 
 struct SampleList: View {
 	@ObservedObject private var fontsObservable: FontsObservable = .shared
-	@State private var isEditingSample = false
 	@State private var sample = Pangrams.standard
+	@State private var isEditingSample = false
 	var body: some View {
 		NavigationStack {
 			List(Fonts.faceNames, id: \.self) { faceName in
