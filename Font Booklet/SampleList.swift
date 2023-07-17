@@ -56,17 +56,20 @@ struct SampleList: View {
 				"Edit Sample Text",
 				isPresented: $isEditingSample
 			) {
-				TextField(
-					text: $sample,
-					prompt: Text(Pangrams.standard)
-				) {
-					let _ = UITextField.appearance().clearButtonMode = .whileEditing
-				}
+				editSampleTextField
 				
 				editSamplePangramButton
-				
 				editSampleDoneButton
 			}
+		}
+	}
+	
+	private var editSampleTextField: some View {
+		TextField(
+			text: $sample,
+			prompt: Text(Pangrams.standard)
+		) {
+			let _ = UITextField.appearance().clearButtonMode = .whileEditing
 		}
 	}
 	
