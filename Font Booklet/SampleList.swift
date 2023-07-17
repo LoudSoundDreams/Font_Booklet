@@ -7,6 +7,18 @@
 
 import SwiftUI
 
+enum Pangrams {
+	static let standard = "The quick brown fox jumps over the lazy dog."
+	static let mysteryBag: [String] = [
+		"Amazingly few discotheques provide jukeboxes.", // Fewest words
+		"Brown jars prevented the mixture from freezing quickly.",
+		"Farmer Jack realized the big yellow quilt was expensive.", // Close to one that aired on “Jeopardy!”
+		"Grumpy wizards make toxic brew for the jovial queen.",
+		"Quick-blowing zephyrs vex daft Jim.",
+		"Watch “Jeopardy!”, Alex Trebek’s fun TV quiz game.", // Includes quotation marks
+	]
+}
+
 struct SampleList: View {
 	private static let familiesAndFaces: [[String]] = {
 		let families = UIFont.familyNames // ["Verdana", "Futura"]
@@ -17,16 +29,7 @@ struct SampleList: View {
 	private static let faces: [String] = familiesAndFaces.flatMap { $0 }
 	
 	@State private var isEditingSample = false
-	@State private var sample = Self.defaultSample
-	private static let defaultSample = "The quick brown fox jumps over the lazy dog."
-	private static let pangrams: [String] = [
-		"Amazingly few discotheques provide jukeboxes.", // Fewest words
-		"Brown jars prevented the mixture from freezing quickly.",
-		"Farmer Jack realized the big yellow quilt was expensive.", // Close to one that aired on “Jeopardy!”
-		"Grumpy wizards make toxic brews for the jovial queen.",
-		"Quick-blowing zephyrs vex daft Jim.",
-		"Watch “Jeopardy!”, Alex Trebek’s fun TV quiz game.", // Includes quotation marks
-	]
+	@State private var sample = Pangrams.standard
 	var body: some View {
 		NavigationStack {
 			List(Self.faces, id: \.self) { faceName in
@@ -55,7 +58,7 @@ struct SampleList: View {
 			) {
 				TextField(
 					text: $sample,
-					prompt: Text(Self.defaultSample)
+					prompt: Text(Pangrams.standard)
 				) {
 					let _ = UITextField.appearance().clearButtonMode = .whileEditing
 				}
@@ -71,7 +74,7 @@ struct SampleList: View {
 		Button("Pangram!") {
 			var newSample = sample
 			while newSample == sample {
-				newSample = Self.pangrams.randomElement()!
+				newSample = Pangrams.mysteryBag.randomElement()!
 			}
 			sample = newSample
 		}
@@ -80,7 +83,7 @@ struct SampleList: View {
 	private var editSampleDoneButton: some View {
 		Button("Done") {
 			if sample.isEmpty {
-				sample = Self.defaultSample
+				sample = Pangrams.standard
 			}
 		}
 		.keyboardShortcut(.defaultAction)
