@@ -29,18 +29,46 @@ enum Fonts {
 	static let faceNames: [String] = familyAndFaceNames.flatMap { $0 }
 }
 
+final class FontsObservable: ObservableObject {
+	private init() {}
+	static let shared = FontsObservable()
+	
+	@Published var bookmarked: Set<String> = []
+}
+
 struct SampleList: View {
+	@ObservedObject private var fontsObservable: FontsObservable = .shared
 	@State private var isEditingSample = false
 	@State private var sample = Pangrams.standard
 	var body: some View {
 		NavigationStack {
 			List(Fonts.faceNames, id: \.self) { faceName in
-				VStack(alignment: .leading) {
-					Text(sample)
-						.font(.custom(faceName, size: 32))
-					Text(faceName)
-						.font(.caption)
-						.foregroundColor(.secondary)
+				HStack(alignment: .lastTextBaseline) {
+					VStack(alignment: .leading) {
+						Text(sample)
+							.font(.custom(faceName, size: 32))
+						Text(faceName)
+							.font(.caption)
+							.foregroundColor(.secondary)
+					}
+					
+					Spacer()
+					
+					ZStack {
+						Image(systemName: "bookmark.fill")
+							.hidden()
+						if fontsObservable.bookmarked.contains(faceName) {
+							Image(systemName: "bookmark.fill")
+								.foregroundStyle(.red)
+						}
+					}
+				}
+				.onTapGesture {
+					if fontsObservable.bookmarked.contains(faceName) {
+						fontsObservable.bookmarked.remove(faceName)
+					} else {
+						fontsObservable.bookmarked.insert(faceName)
+					}
 				}
 			}
 			.navigationTitle("Fonts")
