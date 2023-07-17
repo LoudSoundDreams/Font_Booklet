@@ -51,9 +51,8 @@ struct SampleList: View {
 			}
 			.alert(
 				"Edit Sample Text",
-				isPresented: $isEditingSample,
-				presenting: sample
-			) { text in
+				isPresented: $isEditingSample
+			) {
 				TextField(
 					text: $sample,
 					prompt: Text(Self.defaultSample)
