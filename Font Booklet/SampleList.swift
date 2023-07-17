@@ -86,7 +86,7 @@ struct SampleList: View {
 						Image(systemName: "character.cursor.ibeam")
 					}
 					.alert(
-						"Edit Sample Text",
+						"Sample Text",
 						isPresented: $isEditingSample
 					) {
 						editSampleTextField
