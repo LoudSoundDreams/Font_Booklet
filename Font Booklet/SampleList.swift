@@ -50,16 +50,16 @@ struct SampleList: View {
 					} label: {
 						Image(systemName: "character.cursor.ibeam")
 					}
+					.alert(
+						"Edit Sample Text",
+						isPresented: $isEditingSample
+					) {
+						editSampleTextField
+						
+						editSamplePangramButton
+						editSampleDoneButton
+					}
 				}
-			}
-			.alert(
-				"Edit Sample Text",
-				isPresented: $isEditingSample
-			) {
-				editSampleTextField
-				
-				editSamplePangramButton
-				editSampleDoneButton
 			}
 		}
 	}
