@@ -16,13 +16,21 @@ struct SampleList: View {
 	}()
 	private static let faces: [String] = familiesAndFaces.flatMap { $0 }
 	
-	@State private var isEditingPreviewText = false
-	@State private var previewText = Self.defaultPangram
-	private static let defaultPangram = "The quick brown fox jumps over the lazy dog."
+	@State private var isEditingSample = false
+	@State private var sample = Self.defaultSample
+	private static let defaultSample = "The quick brown fox jumps over the lazy dog."
+	private static let pangrams: [String] = [
+		"Amazingly few discotheques provide jukeboxes.", // Fewest words
+		"Brown jars prevented the mixture from freezing quickly.",
+		"Farmer Jack realized the big yellow quilt was expensive.", // Close to one that aired on “Jeopardy!”
+		"Grumpy wizards make toxic brews for the jovial queen.",
+		"Quick-blowing zephyrs vex daft Jim.",
+		"Watch “Jeopardy!”, Alex Trebek’s fun TV quiz game.", // Includes quotation marks
+	]
 	var body: some View {
 		List(Self.faces, id: \.self) { faceName in
 			VStack(alignment: .leading) {
-				Text(previewText)
+				Text(sample)
 					.font(.custom(faceName, size: 32))
 				Text(faceName)
 					.font(.caption)
@@ -32,31 +40,35 @@ struct SampleList: View {
 		.toolbar {
 			ToolbarItem(placement: .bottomBar) {
 				Button {
-					isEditingPreviewText = true
+					isEditingSample = true
 				} label: {
 					Image(systemName: "character.cursor.ibeam")
 				}
 			}
 		}
 		.alert(
-			"Sample Text", // !
-			isPresented: $isEditingPreviewText,
-			presenting: previewText
+			"Edit Sample Text",
+			isPresented: $isEditingSample,
+			presenting: sample
 		) { text in
 			TextField(
-				text: $previewText,
-				prompt: Text(previewText)
+				text: $sample,
+				prompt: Text(Self.defaultSample)
 			) {
 				let _ = UITextField.appearance().clearButtonMode = .whileEditing
 			}
 			
-			Button("Pangram!") { // !
-				previewText = "Amazingly few discotheques provide jukeboxes. \(Int.random(in: 1...100))"
+			Button("Pangram!") {
+				var newSample = sample
+				while newSample == sample {
+					newSample = Self.pangrams.randomElement()!
+				}
+				sample = newSample
 			}
 			
-			Button("Done") { // !
-				if previewText.isEmpty {
-					previewText = Self.defaultPangram
+			Button("Done") {
+				if sample.isEmpty {
+					sample = Self.defaultSample
 				}
 			}
 			.keyboardShortcut(.defaultAction)
