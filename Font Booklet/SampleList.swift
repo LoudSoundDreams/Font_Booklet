@@ -28,51 +28,63 @@ struct SampleList: View {
 		"Watch “Jeopardy!”, Alex Trebek’s fun TV quiz game.", // Includes quotation marks
 	]
 	var body: some View {
-		List(Self.faces, id: \.self) { faceName in
-			VStack(alignment: .leading) {
-				Text(sample)
-					.font(.custom(faceName, size: 32))
-				Text(faceName)
-					.font(.caption)
-					.foregroundColor(.secondary)
-			}
-		}
-		.toolbar {
-			ToolbarItem(placement: .bottomBar) {
-				Button {
-					isEditingSample = true
-				} label: {
-					Image(systemName: "character.cursor.ibeam")
+		NavigationStack {
+			List(Self.faces, id: \.self) { faceName in
+				VStack(alignment: .leading) {
+					Text(sample)
+						.font(.custom(faceName, size: 32))
+					Text(faceName)
+						.font(.caption)
+						.foregroundColor(.secondary)
 				}
 			}
-		}
-		.alert(
-			"Edit Sample Text",
-			isPresented: $isEditingSample,
-			presenting: sample
-		) { text in
-			TextField(
-				text: $sample,
-				prompt: Text(Self.defaultSample)
-			) {
-				let _ = UITextField.appearance().clearButtonMode = .whileEditing
-			}
-			
-			Button("Pangram!") {
-				var newSample = sample
-				while newSample == sample {
-					newSample = Self.pangrams.randomElement()!
-				}
-				sample = newSample
-			}
-			
-			Button("Done") {
-				if sample.isEmpty {
-					sample = Self.defaultSample
+			.navigationTitle("Fonts")
+			.navigationBarTitleDisplayMode(.inline)
+			.toolbar {
+				ToolbarItem(placement: .bottomBar) {
+					Button {
+						isEditingSample = true
+					} label: {
+						Image(systemName: "character.cursor.ibeam")
+					}
 				}
 			}
-			.keyboardShortcut(.defaultAction)
+			.alert(
+				"Edit Sample Text",
+				isPresented: $isEditingSample,
+				presenting: sample
+			) { text in
+				TextField(
+					text: $sample,
+					prompt: Text(Self.defaultSample)
+				) {
+					let _ = UITextField.appearance().clearButtonMode = .whileEditing
+				}
+				
+				editSamplePangramButton
+				
+				editSampleDoneButton
+			}
 		}
+	}
+	
+	private var editSamplePangramButton: some View {
+		Button("Pangram!") {
+			var newSample = sample
+			while newSample == sample {
+				newSample = Self.pangrams.randomElement()!
+			}
+			sample = newSample
+		}
+	}
+	
+	private var editSampleDoneButton: some View {
+		Button("Done") {
+			if sample.isEmpty {
+				sample = Self.defaultSample
+			}
+		}
+		.keyboardShortcut(.defaultAction)
 	}
 }
 
