@@ -19,20 +19,22 @@ enum Pangrams {
 	]
 }
 
-struct SampleList: View {
-	private static let familiesAndFaces: [[String]] = {
+enum Fonts {
+	private static let familyAndFaceNames: [[String]] = {
 		let families = UIFont.familyNames // ["Verdana", "Futura"]
 		return families.map { family in
 			return UIFont.fontNames(forFamilyName: family) // ["Verdana", "Verdana-Bold"]
 		}
 	}()
-	private static let faces: [String] = familiesAndFaces.flatMap { $0 }
-	
+	static let faceNames: [String] = familyAndFaceNames.flatMap { $0 }
+}
+
+struct SampleList: View {
 	@State private var isEditingSample = false
 	@State private var sample = Pangrams.standard
 	var body: some View {
 		NavigationStack {
-			List(Self.faces, id: \.self) { faceName in
+			List(Fonts.faceNames, id: \.self) { faceName in
 				VStack(alignment: .leading) {
 					Text(sample)
 						.font(.custom(faceName, size: 32))
