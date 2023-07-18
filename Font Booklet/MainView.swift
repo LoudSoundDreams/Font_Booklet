@@ -1,5 +1,5 @@
 //
-//  SampleList.swift
+//  MainView.swift
 //  Font Booklet
 //
 //  Created by h on 2023-05-07.
@@ -14,7 +14,7 @@ final class FontsObservable: ObservableObject {
 	@Published var bookmarked: Set<String> = []
 }
 
-struct SampleList: View {
+struct MainView: View {
 	@ObservedObject private var fontsObservable: FontsObservable = .shared
 	@State private var sample = Pangrams.standard
 	@State private var isEditingSample = false
@@ -129,8 +129,8 @@ struct SampleList: View {
 	}
 }
 
-struct SampleList_Previews: PreviewProvider {
+struct MainView_Previews: PreviewProvider {
 	static var previews: some View {
-		SampleList()
+		MainView()
 	}
 }
