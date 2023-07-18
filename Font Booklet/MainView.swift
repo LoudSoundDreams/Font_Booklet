@@ -53,6 +53,7 @@ struct MainView: View {
 							}
 						}
 					}
+					.contentShape(Rectangle())
 					.onTapGesture {
 						if fontsObservable.bookmarked.contains(faceName) {
 							fontsObservable.bookmarked.remove(faceName)
