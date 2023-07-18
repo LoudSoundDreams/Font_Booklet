@@ -19,7 +19,7 @@ enum Pangrams {
 
 import UIKit
 enum Fonts {
-	private static let familyAndFaceNames: [[String]] = {
+	static let familyAndFaceNames: [[String]] = {
 		let families = UIFont.familyNames // ["Verdana", "Futura"]
 		return families.map { family in
 			return UIFont.fontNames(forFamilyName: family) // ["Verdana", "Verdana-Bold"]

@@ -59,6 +59,7 @@ struct MainView: View {
 						fontsObservable.bookmarked.insert(faceName)
 					}
 				}
+				
 			}
 			.navigationTitle("Fonts")
 			.navigationBarTitleDisplayMode(.inline)
