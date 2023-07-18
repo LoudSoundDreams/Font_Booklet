@@ -17,6 +17,7 @@ final class FontsObservable: ObservableObject {
 struct MainView: View {
 	@ObservedObject private var fontsObservable: FontsObservable = .shared
 	@State private var sample = Pangrams.standard
+	@State private var isFullyExpanded = false
 	@State private var isEditingSample = false
 	@State private var showingBookmarkedOnly = false
 	var body: some View {
@@ -61,6 +62,19 @@ struct MainView: View {
 			}
 			.navigationTitle("Fonts")
 			.navigationBarTitleDisplayMode(.inline)
+			.toolbar {
+				ToolbarItem {
+					Button {
+						isFullyExpanded.toggle()
+					} label: {
+						if isFullyExpanded {
+							Image(systemName: "rectangle.compress.vertical")
+						} else {
+							Image(systemName: "rectangle.expand.vertical")
+						}
+					}
+				}
+			}
 			.toolbar {
 				ToolbarItem(placement: .bottomBar) {
 					Button {
