@@ -50,14 +50,14 @@ struct MainView: View {
 							}
 						}
 					}
-					
-				}
-				.onTapGesture {
-					if fontsObservable.bookmarked.contains(faceName) {
-						fontsObservable.bookmarked.remove(faceName)
-					} else {
-						fontsObservable.bookmarked.insert(faceName)
+					.onTapGesture {
+						if fontsObservable.bookmarked.contains(faceName) {
+							fontsObservable.bookmarked.remove(faceName)
+						} else {
+							fontsObservable.bookmarked.insert(faceName)
+						}
 					}
+					
 				}
 				
 			}
