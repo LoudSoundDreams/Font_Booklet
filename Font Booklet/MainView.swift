@@ -17,7 +17,6 @@ final class FontsObservable: ObservableObject {
 struct MainView: View {
 	@ObservedObject private var fontsObservable: FontsObservable = .shared
 	@State private var sample = Pangrams.standard
-	@State private var isFullyExpanded = false
 	@State private var isEditingSample = false
 	@State private var showingBookmarkedOnly = false
 	var body: some View {
@@ -28,58 +27,38 @@ struct MainView: View {
 			
 			List(visibleFaces, id: \.self) { faceName in
 				
-				DisclosureGroup(
-					faceName,
-					isExpanded: $isFullyExpanded
-				) {
-					
-					HStack(alignment: .lastTextBaseline) {
-						VStack(alignment: .leading) {
-							Text(sample)
-								.font(.custom(faceName, size: 32))
-							Text(faceName)
-								.font(.caption)
-								.foregroundColor(.secondary)
-						}
-						
-						Spacer()
-						
-						ZStack {
-							Image(systemName: "bookmark.fill")
-								.hidden()
-							if fontsObservable.bookmarked.contains(faceName) {
-								Image(systemName: "bookmark.fill")
-									.foregroundStyle(.red)
-							}
-						}
+				HStack(alignment: .lastTextBaseline) {
+					VStack(alignment: .leading) {
+						Text(sample)
+							.font(.custom(faceName, size: 32))
+						Text(faceName)
+							.font(.caption)
+							.foregroundColor(.secondary)
 					}
-					.contentShape(Rectangle())
-					.onTapGesture {
+					
+					Spacer()
+					
+					ZStack {
+						Image(systemName: "bookmark.fill")
+							.hidden()
 						if fontsObservable.bookmarked.contains(faceName) {
-							fontsObservable.bookmarked.remove(faceName)
-						} else {
-							fontsObservable.bookmarked.insert(faceName)
+							Image(systemName: "bookmark.fill")
+								.foregroundStyle(.red)
 						}
 					}
-					
+				}
+				.contentShape(Rectangle())
+				.onTapGesture {
+					if fontsObservable.bookmarked.contains(faceName) {
+						fontsObservable.bookmarked.remove(faceName)
+					} else {
+						fontsObservable.bookmarked.insert(faceName)
+					}
 				}
 				
 			}
 			.navigationTitle("Fonts")
 			.navigationBarTitleDisplayMode(.inline)
-			.toolbar {
-				ToolbarItem {
-					Button {
-						isFullyExpanded.toggle()
-					} label: {
-						if isFullyExpanded {
-							Image(systemName: "rectangle.compress.vertical")
-						} else {
-							Image(systemName: "rectangle.expand.vertical")
-						}
-					}
-				}
-			}
 			.toolbar {
 				ToolbarItem(placement: .bottomBar) {
 					Button {
