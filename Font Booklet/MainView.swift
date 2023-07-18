@@ -26,25 +26,30 @@ struct MainView: View {
 			: Fonts.faceNames
 			
 			List(visibleFaces, id: \.self) { faceName in
-				HStack(alignment: .lastTextBaseline) {
-					VStack(alignment: .leading) {
-						Text(sample)
-							.font(.custom(faceName, size: 32))
-						Text(faceName)
-							.font(.caption)
-							.foregroundColor(.secondary)
-					}
+				
+				DisclosureGroup(faceName) {
 					
-					Spacer()
-					
-					ZStack {
-						Image(systemName: "bookmark.fill")
-							.hidden()
-						if fontsObservable.bookmarked.contains(faceName) {
+					HStack(alignment: .lastTextBaseline) {
+						VStack(alignment: .leading) {
+							Text(sample)
+								.font(.custom(faceName, size: 32))
+							Text(faceName)
+								.font(.caption)
+								.foregroundColor(.secondary)
+						}
+						
+						Spacer()
+						
+						ZStack {
 							Image(systemName: "bookmark.fill")
-								.foregroundStyle(.red)
+								.hidden()
+							if fontsObservable.bookmarked.contains(faceName) {
+								Image(systemName: "bookmark.fill")
+									.foregroundStyle(.red)
+							}
 						}
 					}
+					
 				}
 				.onTapGesture {
 					if fontsObservable.bookmarked.contains(faceName) {
