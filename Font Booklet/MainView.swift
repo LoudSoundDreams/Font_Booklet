@@ -28,7 +28,10 @@ struct MainView: View {
 			
 			List(visibleFaces, id: \.self) { faceName in
 				
-				DisclosureGroup(faceName) {
+				DisclosureGroup(
+					faceName,
+					isExpanded: $isFullyExpanded
+				) {
 					
 					HStack(alignment: .lastTextBaseline) {
 						VStack(alignment: .leading) {
