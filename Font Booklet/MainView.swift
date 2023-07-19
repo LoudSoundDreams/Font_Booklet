@@ -29,7 +29,8 @@ struct MainView: View {
 				
 				HStack(alignment: .lastTextBaseline) {
 					VStack(
-						alignment: .leading
+						alignment: .leading,
+						spacing: .eight
 					) {
 						Text(sample)
 							.font(.custom(
