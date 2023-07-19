@@ -27,19 +27,19 @@ struct MainView: View {
 			
 			List(visibleFaces, id: \.self) { faceName in
 				
-				HStack(alignment: .lastTextBaseline) {
+				HStack(alignment: .top) {
 					VStack(
 						alignment: .leading,
-						spacing: .eight
+						spacing: .eight * 1.5
 					) {
+						Text(faceName)
+							.font(.caption)
+							.foregroundColor(.secondary)
 						Text(sample)
 							.font(.custom(
 								faceName,
 								size: .eight * 4
 							))
-						Text(faceName)
-							.font(.caption)
-							.foregroundColor(.secondary)
 					}
 					
 					Spacer()
