@@ -22,13 +22,7 @@ enum Fonts {
 	static let familyAndFaceNames: [[String]] = {
 		let families = UIFont.familyNames // ["Trebuchet MS", "Verdana"]
 		return families.map { family in
-			let result = UIFont.fontNames(forFamilyName: family) // ["Verdana", "Verdana-Italic", "Verdana-Bold", "Verdana-BoldItalic"]
-			print()
-			print(family)
-			result.forEach {
-				print($0)
-			}
-			return result
+			return UIFont.fontNames(forFamilyName: family) // ["Verdana", "Verdana-Italic", "Verdana-Bold", "Verdana-BoldItalic"]
 		}
 	}()
 	static let faceNames: [String] = familyAndFaceNames.flatMap { $0 }
