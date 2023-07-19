@@ -74,22 +74,23 @@ struct MainView: View {
 	@State private var filteringToBookmarked = false
 	var body: some View {
 		NavigationStack {
-			let visibleMembers: [String] = filteringToBookmarked
-			? Fonts.members.filter { bookmarked.faces.contains($0) }
-			: Fonts.members
-			
-			List(visibleMembers, id: \.self) { member in
+			List(Family.all) { family in
 				
-				MemberView(
-					name: member,
-					sampleText: sample
-				)
-				.alignmentGuide(.listRowSeparatorTrailing) { viewDimensions in
-					viewDimensions[.trailing]
+				Section(family.surname) {
+					ForEach(family.members, id: \.self) { member in
+						
+						MemberView(
+							name: member,
+							sampleText: sample
+						)
+						.alignmentGuide(.listRowSeparatorTrailing) { viewDimensions in
+							viewDimensions[.trailing]
+						}
+						
+					}
 				}
 				
 			}
-			.listStyle(.plain) // As of iOS 16.4, `.inset` seems identical
 			.navigationTitle("Fonts")
 			.navigationBarTitleDisplayMode(.inline)
 			.toolbar {
