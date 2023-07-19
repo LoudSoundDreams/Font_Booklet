@@ -45,7 +45,7 @@ struct MainView: View {
 				HStack(alignment: .top) {
 					VStack(
 						alignment: .leading,
-						spacing: .eight * 1.5
+						spacing: .eight
 					) {
 						Text(member)
 							.font(.caption)
