@@ -17,3 +17,8 @@ extension String {
 		return String(result)
 	}
 }
+
+import Foundation
+extension CGFloat {
+	static let eight: Self = 8
+}
