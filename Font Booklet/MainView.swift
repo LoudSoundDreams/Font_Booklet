@@ -48,6 +48,9 @@ struct MainView: View {
 					}
 				}
 				.contentShape(Rectangle())
+				.alignmentGuide(.listRowSeparatorTrailing) { viewDimensions in
+					viewDimensions[.trailing]
+				}
 				.onTapGesture {
 					if fontsObservable.bookmarked.contains(faceName) {
 						fontsObservable.bookmarked.remove(faceName)
@@ -57,6 +60,7 @@ struct MainView: View {
 				}
 				
 			}
+			.listStyle(.plain) // As of iOS 16.4, `.inset` seems identical
 			.navigationTitle("Fonts")
 			.navigationBarTitleDisplayMode(.inline)
 			.toolbar {
