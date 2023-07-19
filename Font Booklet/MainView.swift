@@ -14,6 +14,21 @@ final class Bookmarked: ObservableObject {
 	@Published var faces: Set<String> = []
 }
 
+struct BookmarkImage: View {
+	let visible: Bool
+	
+	var body: some View {
+		ZStack {
+			Image(systemName: "bookmark.fill")
+				.hidden()
+			if visible {
+				Image(systemName: "bookmark.fill")
+					.foregroundStyle(.red)
+			}
+		}
+	}
+}
+
 struct MainView: View {
 	@ObservedObject private var bookmarked: Bookmarked = .shared
 	@State private var sample = Pangrams.standard
@@ -44,14 +59,7 @@ struct MainView: View {
 					
 					Spacer()
 					
-					ZStack {
-						Image(systemName: "bookmark.fill")
-							.hidden()
-						if bookmarked.faces.contains(member) {
-							Image(systemName: "bookmark.fill")
-								.foregroundStyle(.red)
-						}
-					}
+					BookmarkImage(visible: bookmarked.faces.contains(member))
 				}
 				.contentShape(Rectangle())
 				.alignmentGuide(.listRowSeparatorTrailing) { viewDimensions in
