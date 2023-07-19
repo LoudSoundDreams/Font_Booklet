@@ -12,7 +12,19 @@
 		072135F32A0827BF00BE0925 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 072135F22A0827BF00BE0925 /* Preview Assets.xcassets */; };
 		072135FA2A0828AD00BE0925 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072135F92A0828AD00BE0925 /* MainView.swift */; };
 		073F99042A65B9E200EAC47B /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073F99032A65B9E200EAC47B /* Resources.swift */; };
+		073F991C2A66F24700EAC47B /* Font_Booklet_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073F991B2A66F24700EAC47B /* Font_Booklet_Tests.swift */; };
+		073F99232A6723FD00EAC47B /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073F99222A6723FD00EAC47B /* Extensions.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		073F991D2A66F24700EAC47B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 072135DF2A0827BD00BE0925 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 072135E62A0827BD00BE0925;
+			remoteInfo = "Font Booklet";
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		072135E72A0827BD00BE0925 /* Font Booklet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Font Booklet.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -23,10 +35,20 @@
 		072135F92A0828AD00BE0925 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		073F99032A65B9E200EAC47B /* Resources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
 		073F99052A65CC1200EAC47B /* Font-Booklet-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Font-Booklet-Info.plist"; sourceTree = SOURCE_ROOT; };
+		073F99192A66F24700EAC47B /* Font Booklet Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Font Booklet Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		073F991B2A66F24700EAC47B /* Font_Booklet_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font_Booklet_Tests.swift; sourceTree = "<group>"; };
+		073F99222A6723FD00EAC47B /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		072135E42A0827BD00BE0925 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		073F99162A66F24700EAC47B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -40,6 +62,7 @@
 			isa = PBXGroup;
 			children = (
 				072135E92A0827BD00BE0925 /* Font Booklet */,
+				073F991A2A66F24700EAC47B /* Font Booklet Tests */,
 				072135E82A0827BD00BE0925 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -48,6 +71,7 @@
 			isa = PBXGroup;
 			children = (
 				072135E72A0827BD00BE0925 /* Font Booklet.app */,
+				073F99192A66F24700EAC47B /* Font Booklet Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -60,6 +84,7 @@
 				072135EE2A0827BF00BE0925 /* Assets.xcassets */,
 				072135F02A0827BF00BE0925 /* Font_Booklet.entitlements */,
 				073F99032A65B9E200EAC47B /* Resources.swift */,
+				073F99222A6723FD00EAC47B /* Extensions.swift */,
 				072135EA2A0827BD00BE0925 /* Font_BookletApp.swift */,
 				072135F92A0828AD00BE0925 /* MainView.swift */,
 			);
@@ -72,6 +97,14 @@
 				072135F22A0827BF00BE0925 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		073F991A2A66F24700EAC47B /* Font Booklet Tests */ = {
+			isa = PBXGroup;
+			children = (
+				073F991B2A66F24700EAC47B /* Font_Booklet_Tests.swift */,
+			);
+			path = "Font Booklet Tests";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -94,6 +127,24 @@
 			productReference = 072135E72A0827BD00BE0925 /* Font Booklet.app */;
 			productType = "com.apple.product-type.application";
 		};
+		073F99182A66F24700EAC47B /* Font Booklet Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 073F991F2A66F24700EAC47B /* Build configuration list for PBXNativeTarget "Font Booklet Tests" */;
+			buildPhases = (
+				073F99152A66F24700EAC47B /* Sources */,
+				073F99162A66F24700EAC47B /* Frameworks */,
+				073F99172A66F24700EAC47B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				073F991E2A66F24700EAC47B /* PBXTargetDependency */,
+			);
+			name = "Font Booklet Tests";
+			productName = "Font Booklet Tests";
+			productReference = 073F99192A66F24700EAC47B /* Font Booklet Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -106,6 +157,10 @@
 				TargetAttributes = {
 					072135E62A0827BD00BE0925 = {
 						CreatedOnToolsVersion = 14.3;
+					};
+					073F99182A66F24700EAC47B = {
+						CreatedOnToolsVersion = 14.3.1;
+						TestTargetID = 072135E62A0827BD00BE0925;
 					};
 				};
 			};
@@ -123,6 +178,7 @@
 			projectRoot = "";
 			targets = (
 				072135E62A0827BD00BE0925 /* Font Booklet */,
+				073F99182A66F24700EAC47B /* Font Booklet Tests */,
 			);
 		};
 /* End PBXProject section */
@@ -137,6 +193,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		073F99172A66F24700EAC47B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -147,10 +210,27 @@
 				072135FA2A0828AD00BE0925 /* MainView.swift in Sources */,
 				073F99042A65B9E200EAC47B /* Resources.swift in Sources */,
 				072135EB2A0827BD00BE0925 /* Font_BookletApp.swift in Sources */,
+				073F99232A6723FD00EAC47B /* Extensions.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		073F99152A66F24700EAC47B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				073F991C2A66F24700EAC47B /* Font_Booklet_Tests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		073F991E2A66F24700EAC47B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 072135E62A0827BD00BE0925 /* Font Booklet */;
+			targetProxy = 073F991D2A66F24700EAC47B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		072135F42A0827BF00BE0925 /* Debug */ = {
@@ -346,6 +426,47 @@
 			};
 			name = Release;
 		};
+		073F99202A66F24700EAC47B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = DN5BFUM2N5;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.loudsounddreams.Font-Booklet-Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Font Booklet.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Font Booklet";
+			};
+			name = Debug;
+		};
+		073F99212A66F24700EAC47B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = DN5BFUM2N5;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.loudsounddreams.Font-Booklet-Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Font Booklet.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Font Booklet";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -363,6 +484,15 @@
 			buildConfigurations = (
 				072135F72A0827BF00BE0925 /* Debug */,
 				072135F82A0827BF00BE0925 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		073F991F2A66F24700EAC47B /* Build configuration list for PBXNativeTarget "Font Booklet Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				073F99202A66F24700EAC47B /* Debug */,
+				073F99212A66F24700EAC47B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
