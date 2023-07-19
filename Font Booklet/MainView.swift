@@ -29,6 +29,44 @@ struct BookmarkImage: View {
 	}
 }
 
+struct MemberView: View {
+	let name: String
+	let sampleText: String
+	
+	@ObservedObject private var bookmarked: Bookmarked = .shared
+	
+	var body: some View {
+		HStack(alignment: .top) {
+			
+			VStack(
+				alignment: .leading,
+				spacing: .eight
+			) {
+				Text(name)
+					.font(.caption)
+					.foregroundColor(.secondary)
+				Text(sampleText)
+					.font(.custom(
+						name,
+						size: .eight * 4
+					))
+			}
+			
+			Spacer()
+			
+			BookmarkImage(visible: bookmarked.faces.contains(name))
+		}
+		.contentShape(Rectangle())
+		.onTapGesture {
+			if bookmarked.faces.contains(name) {
+				bookmarked.faces.remove(name)
+			} else {
+				bookmarked.faces.insert(name)
+			}
+		}
+	}
+}
+
 struct MainView: View {
 	@ObservedObject private var bookmarked: Bookmarked = .shared
 	@State private var sample = Pangrams.standard
@@ -42,35 +80,12 @@ struct MainView: View {
 			
 			List(visibleMembers, id: \.self) { member in
 				
-				HStack(alignment: .top) {
-					VStack(
-						alignment: .leading,
-						spacing: .eight
-					) {
-						Text(member)
-							.font(.caption)
-							.foregroundColor(.secondary)
-						Text(sample)
-							.font(.custom(
-								member,
-								size: .eight * 4
-							))
-					}
-					
-					Spacer()
-					
-					BookmarkImage(visible: bookmarked.faces.contains(member))
-				}
-				.contentShape(Rectangle())
+				MemberView(
+					name: member,
+					sampleText: sample
+				)
 				.alignmentGuide(.listRowSeparatorTrailing) { viewDimensions in
 					viewDimensions[.trailing]
-				}
-				.onTapGesture {
-					if bookmarked.faces.contains(member) {
-						bookmarked.faces.remove(member)
-					} else {
-						bookmarked.faces.insert(member)
-					}
 				}
 				
 			}
