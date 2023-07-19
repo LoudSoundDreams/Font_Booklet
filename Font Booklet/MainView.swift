@@ -7,37 +7,37 @@
 
 import SwiftUI
 
-final class FontsObservable: ObservableObject {
+final class Bookmarked: ObservableObject {
 	private init() {}
-	static let shared = FontsObservable()
+	static let shared = Bookmarked()
 	
-	@Published var bookmarked: Set<String> = []
+	@Published var faces: Set<String> = []
 }
 
 struct MainView: View {
-	@ObservedObject private var fontsObservable: FontsObservable = .shared
+	@ObservedObject private var bookmarked: Bookmarked = .shared
 	@State private var sample = Pangrams.standard
-	@State private var isEditingSample = false
-	@State private var showingBookmarkedOnly = false
+	@State private var editingSample = false
+	@State private var filteringToBookmarked = false
 	var body: some View {
 		NavigationStack {
-			let visibleFaces: [String] = showingBookmarkedOnly
-			? Fonts.faceNames.filter { fontsObservable.bookmarked.contains($0) }
-			: Fonts.faceNames
+			let visibleMembers: [String] = filteringToBookmarked
+			? Fonts.members.filter { bookmarked.faces.contains($0) }
+			: Fonts.members
 			
-			List(visibleFaces, id: \.self) { faceName in
+			List(visibleMembers, id: \.self) { member in
 				
 				HStack(alignment: .top) {
 					VStack(
 						alignment: .leading,
 						spacing: .eight * 1.5
 					) {
-						Text(faceName)
+						Text(member)
 							.font(.caption)
 							.foregroundColor(.secondary)
 						Text(sample)
 							.font(.custom(
-								faceName,
+								member,
 								size: .eight * 4
 							))
 					}
@@ -47,7 +47,7 @@ struct MainView: View {
 					ZStack {
 						Image(systemName: "bookmark.fill")
 							.hidden()
-						if fontsObservable.bookmarked.contains(faceName) {
+						if bookmarked.faces.contains(member) {
 							Image(systemName: "bookmark.fill")
 								.foregroundStyle(.red)
 						}
@@ -58,10 +58,10 @@ struct MainView: View {
 					viewDimensions[.trailing]
 				}
 				.onTapGesture {
-					if fontsObservable.bookmarked.contains(faceName) {
-						fontsObservable.bookmarked.remove(faceName)
+					if bookmarked.faces.contains(member) {
+						bookmarked.faces.remove(member)
 					} else {
-						fontsObservable.bookmarked.insert(faceName)
+						bookmarked.faces.insert(member)
 					}
 				}
 				
@@ -72,13 +72,13 @@ struct MainView: View {
 			.toolbar {
 				ToolbarItem(placement: .bottomBar) {
 					Button {
-						isEditingSample = true
+						editingSample = true
 					} label: {
 						Image(systemName: "character.cursor.ibeam")
 					}
 					.alert(
 						"Sample Text",
-						isPresented: $isEditingSample
+						isPresented: $editingSample
 					) {
 						editSampleTextField
 						
@@ -92,7 +92,7 @@ struct MainView: View {
 				}
 				
 				ToolbarItem(placement: .bottomBar) {
-					if showingBookmarkedOnly {
+					if filteringToBookmarked {
 						filterButton
 							.buttonStyle(.borderedProminent)
 					} else {
@@ -106,7 +106,7 @@ struct MainView: View {
 	
 	private var filterButton: some View {
 		Button {
-			showingBookmarkedOnly.toggle()
+			filteringToBookmarked.toggle()
 		} label: {
 			Image(systemName: "bookmark")
 		}
