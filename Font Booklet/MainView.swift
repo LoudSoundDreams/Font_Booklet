@@ -57,35 +57,6 @@ struct TraitCloud: View {
 	}
 }
 
-struct MemberView: View {
-	let name: String
-	let sampleText: String
-	
-	@ObservedObject private var bookmarked: Bookmarked = .shared
-	
-	var body: some View {
-		HStack(alignment: .top) {
-			VStack(
-				alignment: .leading,
-				spacing: .eight
-			) {
-				Text(name)
-					.font(.caption)
-					.foregroundColor(.secondary)
-				Text(sampleText)
-					.font(.custom(
-						name,
-						size: .eight * 3
-					))
-			}
-			Spacer()
-			BookmarkImage(visible: bookmarked.faces.contains(name))
-		}
-		.contentShape(Rectangle())
-		.onTapGesture_ToggleBookmarked(name: name, in: bookmarked)
-	}
-}
-
 private extension View {
 	func onTapGesture_ToggleBookmarked(
 		name: String,
@@ -121,6 +92,35 @@ private extension View {
 				.tint(.red)
 			}
 		}
+	}
+}
+
+struct MemberView: View {
+	let name: String
+	let sampleText: String
+	
+	@ObservedObject private var bookmarked: Bookmarked = .shared
+	
+	var body: some View {
+		HStack(alignment: .top) {
+			VStack(
+				alignment: .leading,
+				spacing: .eight
+			) {
+				Text(name)
+					.font(.caption)
+					.foregroundColor(.secondary)
+				Text(sampleText)
+					.font(.custom(
+						name,
+						size: .eight * 3
+					))
+			}
+			Spacer()
+			BookmarkImage(visible: bookmarked.faces.contains(name))
+		}
+		.contentShape(Rectangle())
+		.onTapGesture_ToggleBookmarked(name: name, in: bookmarked)
 	}
 }
 
