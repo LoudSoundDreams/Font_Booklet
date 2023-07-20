@@ -11,7 +11,7 @@ final class Bookmarked: ObservableObject {
 	private init() {}
 	static let shared = Bookmarked()
 	
-	@Published var faces: Set<String> = []
+	@Published var members: Set<String> = []
 }
 
 struct BookmarkImage: View {
@@ -63,10 +63,10 @@ private extension View {
 		in bookmarked: Bookmarked
 	) -> some View {
 		onTapGesture {
-			if bookmarked.faces.contains(name) {
-				bookmarked.faces.remove(name)
+			if bookmarked.members.contains(name) {
+				bookmarked.members.remove(name)
 			} else {
-				bookmarked.faces.insert(name)
+				bookmarked.members.insert(name)
 			}
 		}
 	}
@@ -76,16 +76,16 @@ private extension View {
 		in bookmarked: Bookmarked
 	) -> some View {
 		swipeActions(edge: .leading) {
-			if bookmarked.faces.contains(name) {
+			if bookmarked.members.contains(name) {
 				Button {
-					bookmarked.faces.remove(name)
+					bookmarked.members.remove(name)
 				} label: {
 					Image(systemName: "bookmark.slash.fill")
 				}
 				.tint(.red)
 			} else {
 				Button {
-					bookmarked.faces.insert(name)
+					bookmarked.members.insert(name)
 				} label: {
 					Image(systemName: "bookmark.fill")
 				}
@@ -117,7 +117,7 @@ struct MemberView: View {
 					))
 			}
 			Spacer()
-			BookmarkImage(visible: bookmarked.faces.contains(name))
+			BookmarkImage(visible: bookmarked.members.contains(name))
 		}
 		.contentShape(Rectangle())
 		.onTapGesture_ToggleBookmarked(name: name, in: bookmarked)
