@@ -102,6 +102,29 @@ private extension View {
 			}
 		}
 	}
+	
+	func swipeActions_ToggleBookmarked(
+		name: String,
+		in bookmarked: Bookmarked
+	) -> some View {
+		swipeActions(edge: .leading) {
+			if bookmarked.faces.contains(name) {
+				Button {
+					bookmarked.faces.remove(name)
+				} label: {
+					Image(systemName: "bookmark.slash.fill")
+				}
+				.tint(.red)
+			} else {
+				Button {
+					bookmarked.faces.insert(name)
+				} label: {
+					Image(systemName: "bookmark.fill")
+				}
+				.tint(.red)
+			}
+		}
+	}
 }
 
 struct MainView: View {
