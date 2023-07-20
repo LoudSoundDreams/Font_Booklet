@@ -138,15 +138,12 @@ struct MainView: View {
 						
 						MemberView(
 							name: member,
-							sampleText: sample
-						)
+							sampleText: sample)
 						.alignmentGuide(.listRowSeparatorTrailing) { viewDimensions in
 							viewDimensions[.trailing]
 						}
-						
 					}
 				}
-				
 			}
 			.navigationTitle("Fonts")
 			.navigationBarTitleDisplayMode(.inline)
@@ -162,23 +159,16 @@ struct MainView: View {
 						isPresented: $editingSample
 					) {
 						editSampleTextField
-						
 						editSamplePangramButton
 						editSampleDoneButton
 					}
 				}
-				
-				ToolbarItem(placement: .bottomBar) {
-					Spacer()
-				}
-				
+				ToolbarItem(placement: .bottomBar) { Spacer() }
 				ToolbarItem(placement: .bottomBar) {
 					if filteringToBookmarked {
-						filterButton
-							.buttonStyle(.borderedProminent)
+						filterButton.buttonStyle(.borderedProminent)
 					} else {
-						filterButton
-							.buttonStyle(.bordered)
+						filterButton.buttonStyle(.bordered)
 					}
 				}
 			}
