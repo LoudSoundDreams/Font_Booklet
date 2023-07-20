@@ -11,7 +11,40 @@ final class Bookmarked: ObservableObject {
 	private init() {}
 	static let shared = Bookmarked()
 	
-	@Published var members: Set<String> = []
+	private static let defaults: UserDefaults = .standard
+	private static let persistentKeyHead = "BookmarkedMember "
+	@Published var members: Set<String> = {
+		let allEntries = Bookmarked.defaults.dictionaryRepresentation()
+		let entriesWithHead = allEntries.keys.filter { key in
+			key.hasPrefix(Bookmarked.persistentKeyHead)
+		}
+		let bookmarkedMembers = entriesWithHead.map { entryWithHead in
+			let member = entryWithHead.dropFirst(Bookmarked.persistentKeyHead.count)
+			return String(member)
+		}
+		return Set(bookmarkedMembers)
+	}()
+	{
+		didSet {
+			let currentKeys: [String] = members.map { member in
+				"\(Self.persistentKeyHead)\(member)"
+			}
+			
+			Self.defaults.dictionaryRepresentation().forEach { (fetchedKey, _) in
+				if fetchedKey.hasPrefix(Self.persistentKeyHead)
+					&& !currentKeys.contains(fetchedKey)
+				{
+					Self.defaults.removeObject(forKey: fetchedKey)
+				}
+			}
+			
+			currentKeys.forEach { currentKey in
+				Self.defaults.setValue(
+					true, // Doesn’t actually matter
+					forKey: currentKey)
+			}
+		}
+	}
 }
 
 struct BookmarkImage: View {
