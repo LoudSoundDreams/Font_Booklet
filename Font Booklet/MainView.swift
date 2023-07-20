@@ -131,7 +131,21 @@ struct MainView: View {
 	@State private var filteringToBookmarked = false
 	var body: some View {
 		NavigationStack {
-			List(Family.all) { family in
+			let visibleFamilies: [Family] = filteringToBookmarked
+			? {
+				var result: [Family] = []
+				Family.all.forEach { family in
+					let visibleMembers: [String] = family.members.filter { member in
+						bookmarked.members.contains(member)
+					}
+					guard !visibleMembers.isEmpty else { return }
+					result.append(Family(surname: family.surname, members: visibleMembers))
+				}
+				return result
+			}()
+			: Family.all
+			
+			List(visibleFamilies) { family in
 				
 				Section(family.surname) {
 					ForEach(family.members, id: \.self) { member in
