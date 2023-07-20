@@ -65,7 +65,6 @@ struct MemberView: View {
 	
 	var body: some View {
 		HStack(alignment: .top) {
-			
 			VStack(
 				alignment: .leading,
 				spacing: .eight
@@ -79,9 +78,7 @@ struct MemberView: View {
 						size: .eight * 3
 					))
 			}
-			
 			Spacer()
-			
 			BookmarkImage(visible: bookmarked.faces.contains(name))
 		}
 		.contentShape(Rectangle())
