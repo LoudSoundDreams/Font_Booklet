@@ -85,7 +85,16 @@ struct MemberView: View {
 			BookmarkImage(visible: bookmarked.faces.contains(name))
 		}
 		.contentShape(Rectangle())
-		.onTapGesture {
+		.onTapGesture_ToggleBookmarked(name: name, in: bookmarked)
+	}
+}
+
+private extension View {
+	func onTapGesture_ToggleBookmarked(
+		name: String,
+		in bookmarked: Bookmarked
+	) -> some View {
+		onTapGesture {
 			if bookmarked.faces.contains(name) {
 				bookmarked.faces.remove(name)
 			} else {
