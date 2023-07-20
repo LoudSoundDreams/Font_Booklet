@@ -76,7 +76,7 @@ struct MemberView: View {
 				Text(sampleText)
 					.font(.custom(
 						name,
-						size: .eight * 4
+						size: .eight * 3
 					))
 			}
 			
