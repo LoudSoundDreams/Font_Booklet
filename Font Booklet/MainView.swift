@@ -29,6 +29,34 @@ struct BookmarkImage: View {
 	}
 }
 
+struct TraitCloud: View {
+	let uiFont: UIFont
+	
+	var body: some View {
+		HStack(alignment: .top) {
+			column(with: FontTrait.allCases.filter { !$0.isClass })
+			Spacer()
+			column(with: FontTrait.allCases.filter { $0.isClass })
+		}
+	}
+	
+	@ViewBuilder
+	private func column(with traits: [FontTrait]) -> some View {
+		VStack(alignment: .leading) {
+			ForEach(traits) { trait in
+				let uiFontTraits = uiFont.fontDescriptor.symbolicTraits
+				if uiFontTraits.contains(trait.uiFontDescriptorSymbolicTrait) {
+					Text(trait.displayName)
+						.foregroundStyle(Color.accentColor)
+				} else {
+					Text(trait.displayName)
+						.foregroundStyle(.secondary)
+				}
+			}
+		}
+	}
+}
+
 struct MemberView: View {
 	let name: String
 	let sampleText: String
