@@ -162,22 +162,22 @@ struct MainView: View {
 	@AppStorage("SampleText") private var sample: String = Pangrams.standard
 	@State private var editingSample = false
 	@State private var filteringToBookmarked = false
+	private var visibleFamilies: [Family] {
+		guard filteringToBookmarked else {
+			return Family.all
+		}
+		var result: [Family] = []
+		Family.all.forEach { family in
+			let visibleMembers: [String] = family.members.filter { member in
+				bookmarked.members.contains(member)
+			}
+			guard !visibleMembers.isEmpty else { return }
+			result.append(Family(surname: family.surname, members: visibleMembers))
+		}
+		return result
+	}
 	var body: some View {
 		NavigationStack {
-			let visibleFamilies: [Family] = filteringToBookmarked
-			? {
-				var result: [Family] = []
-				Family.all.forEach { family in
-					let visibleMembers: [String] = family.members.filter { member in
-						bookmarked.members.contains(member)
-					}
-					guard !visibleMembers.isEmpty else { return }
-					result.append(Family(surname: family.surname, members: visibleMembers))
-				}
-				return result
-			}()
-			: Family.all
-			
 			List(visibleFamilies) { family in
 				
 				Section(family.surname) {
@@ -239,7 +239,6 @@ struct MainView: View {
 			let _ = UITextField.appearance().clearButtonMode = .whileEditing
 		}
 	}
-	
 	private var editSamplePangramButton: some View {
 		Button("Pangram!") {
 			var newSample = sample
@@ -249,7 +248,6 @@ struct MainView: View {
 			sample = newSample
 		}
 	}
-	
 	private var editSampleDoneButton: some View {
 		Button("Done") {
 			if sample.isEmpty {
