@@ -22,6 +22,7 @@ import UIKit
 extension Family: Identifiable {
 	var id: String { surname }
 }
+extension Family: Hashable {}
 struct Family {
 	let surname: String
 	let members: [String]
