@@ -1,5 +1,5 @@
 //
-//  Font_Booklet_Tests.swift
+//  FontBookletTests.swift
 //  Font Booklet Tests
 //
 //  Created by h on 2023-07-18.
@@ -72,7 +72,7 @@ enum KnownFamily: String, CaseIterable {
 	}
 }
 
-final class Font_Booklet_Tests: XCTestCase {
+final class FontBookletTests: XCTestCase {
 	func testGetStylesFromFamily() throws {
 		let fetchedFamilies = Set(UIFont.familyNames) // ["Verdana", "Futura"]
 		KnownFamily.allCases.forEach { knownFamily in

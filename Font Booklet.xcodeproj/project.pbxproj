@@ -12,7 +12,7 @@
 		072135F32A0827BF00BE0925 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 072135F22A0827BF00BE0925 /* Preview Assets.xcassets */; };
 		072135FA2A0828AD00BE0925 /* Interface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072135F92A0828AD00BE0925 /* Interface.swift */; };
 		073F99042A65B9E200EAC47B /* Knowledge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073F99032A65B9E200EAC47B /* Knowledge.swift */; };
-		073F991C2A66F24700EAC47B /* Font_Booklet_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073F991B2A66F24700EAC47B /* Font_Booklet_Tests.swift */; };
+		073F991C2A66F24700EAC47B /* FontBookletTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073F991B2A66F24700EAC47B /* FontBookletTests.swift */; };
 		073F99232A6723FD00EAC47B /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073F99222A6723FD00EAC47B /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
@@ -36,7 +36,7 @@
 		073F99032A65B9E200EAC47B /* Knowledge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Knowledge.swift; sourceTree = "<group>"; };
 		073F99052A65CC1200EAC47B /* Font-Booklet-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Font-Booklet-Info.plist"; sourceTree = SOURCE_ROOT; };
 		073F99192A66F24700EAC47B /* Font Booklet Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Font Booklet Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		073F991B2A66F24700EAC47B /* Font_Booklet_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font_Booklet_Tests.swift; sourceTree = "<group>"; };
+		073F991B2A66F24700EAC47B /* FontBookletTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontBookletTests.swift; sourceTree = "<group>"; };
 		073F99222A6723FD00EAC47B /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -102,7 +102,7 @@
 		073F991A2A66F24700EAC47B /* Font Booklet Tests */ = {
 			isa = PBXGroup;
 			children = (
-				073F991B2A66F24700EAC47B /* Font_Booklet_Tests.swift */,
+				073F991B2A66F24700EAC47B /* FontBookletTests.swift */,
 			);
 			path = "Font Booklet Tests";
 			sourceTree = "<group>";
@@ -218,7 +218,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				073F991C2A66F24700EAC47B /* Font_Booklet_Tests.swift in Sources */,
+				073F991C2A66F24700EAC47B /* FontBookletTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
