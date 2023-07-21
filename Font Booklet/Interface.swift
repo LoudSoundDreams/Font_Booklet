@@ -152,8 +152,7 @@ struct MemberView: View {
 			Spacer()
 			BookmarkImage(visible: bookmarked.members.contains(name))
 		}
-		.contentShape(Rectangle())
-		.onTapGesture_ToggleBookmarked(name: name, in: bookmarked)
+		.swipeActions_ToggleBookmarked(name: name, in: bookmarked)
 	}
 }
 
@@ -192,16 +191,26 @@ struct MainView: View {
 					}
 				}
 			}
+			.overlay {
+				if visibleFamilies.isEmpty {
+					// Xcode 15: Replace this with `ContentUnavailableView`.
+					VStack {
+						Image(systemName: "bookmark.fill")
+							.foregroundStyle(.secondary)
+							.font(.largeTitle)
+						Text("No Bookmarks")
+							.font(.title)
+						Text("Swipe right on a font to bookmark it.")
+							.foregroundStyle(.secondary)
+					}
+					.multilineTextAlignment(.center)
+					.padding()
+				}
+			}
 			.navigationTitle("Fonts")
 			.navigationBarTitleDisplayMode(.inline)
 			.toolbar {
-				ToolbarItem(placement: .bottomBar) {
-					if filteringToBookmarked {
-						filterButton.buttonStyle(.borderedProminent)
-					} else {
-						filterButton.buttonStyle(.bordered)
-					}
-				}
+				ToolbarItem(placement: .bottomBar) { filterButton }
 				ToolbarItem(placement: .bottomBar) { Spacer() }
 				ToolbarItem(placement: .bottomBar) {
 					Button {
@@ -226,9 +235,12 @@ struct MainView: View {
 		Button {
 			filteringToBookmarked.toggle()
 		} label: {
-			Image(systemName: "bookmark")
+			if filteringToBookmarked {
+				Image(systemName: "line.3.horizontal.decrease.circle.fill")
+			} else {
+				Image(systemName: "line.3.horizontal.decrease.circle")
+			}
 		}
-		.tint(.red)
 	}
 	
 	private var editSampleTextField: some View {
