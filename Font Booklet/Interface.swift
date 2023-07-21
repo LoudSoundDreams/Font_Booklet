@@ -128,8 +128,9 @@ private extension View {
 	}
 }
 
-struct MemberView: View {
-	let name: String
+struct SampleView: View {
+	let label: String
+	let memberName: String
 	let sampleText: String
 	
 	@ObservedObject private var bookmarked: Bookmarked = .shared
@@ -140,19 +141,20 @@ struct MemberView: View {
 				alignment: .leading,
 				spacing: .eight
 			) {
-				Text(name)
+				Text(label)
 					.font(.caption)
 					.foregroundColor(.secondary)
 				Text(sampleText)
 					.font(.custom(
-						name,
+						memberName,
 						size: .eight * 3
 					))
 			}
 			Spacer()
-			BookmarkImage(visible: bookmarked.members.contains(name))
+			BookmarkImage(visible: bookmarked.members.contains(memberName))
 		}
-		.swipeActions_ToggleBookmarked(name: name, in: bookmarked)
+		.swipeActions_ToggleBookmarked(name: memberName, in: bookmarked)
+//		.contentShape(Rectangle()) // TO DO: Do we need this?
 	}
 }
 
@@ -178,17 +180,12 @@ struct MainView: View {
 	var body: some View {
 		NavigationStack {
 			List(visibleFamilies) { family in
-				
-				Section(family.surname) {
-					ForEach(family.members, id: \.self) { member in
-						
-						MemberView(
-							name: member,
-							sampleText: sample)
-						.alignmentGuide(.listRowSeparatorTrailing) { viewDimensions in
-							viewDimensions[.trailing]
-						}
-					}
+				SampleView(
+					label: family.surname,
+					memberName: family.members.first!,
+					sampleText: sample)
+				.alignmentGuide(.listRowSeparatorTrailing) { viewDimensions in
+					viewDimensions[.trailing]
 				}
 			}
 			.overlay {
@@ -207,6 +204,7 @@ struct MainView: View {
 					.padding()
 				}
 			}
+			.listStyle(.plain)
 			.navigationTitle("Fonts")
 			.navigationBarTitleDisplayMode(.inline)
 			.toolbar {
