@@ -10,8 +10,8 @@
 		072135EB2A0827BD00BE0925 /* Font_BookletApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072135EA2A0827BD00BE0925 /* Font_BookletApp.swift */; };
 		072135EF2A0827BF00BE0925 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 072135EE2A0827BF00BE0925 /* Assets.xcassets */; };
 		072135F32A0827BF00BE0925 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 072135F22A0827BF00BE0925 /* Preview Assets.xcassets */; };
-		072135FA2A0828AD00BE0925 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072135F92A0828AD00BE0925 /* MainView.swift */; };
-		073F99042A65B9E200EAC47B /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073F99032A65B9E200EAC47B /* Resources.swift */; };
+		072135FA2A0828AD00BE0925 /* Interface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072135F92A0828AD00BE0925 /* Interface.swift */; };
+		073F99042A65B9E200EAC47B /* Knowledge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073F99032A65B9E200EAC47B /* Knowledge.swift */; };
 		073F991C2A66F24700EAC47B /* Font_Booklet_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073F991B2A66F24700EAC47B /* Font_Booklet_Tests.swift */; };
 		073F99232A6723FD00EAC47B /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073F99222A6723FD00EAC47B /* Extensions.swift */; };
 /* End PBXBuildFile section */
@@ -32,8 +32,8 @@
 		072135EE2A0827BF00BE0925 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		072135F02A0827BF00BE0925 /* Font_Booklet.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Font_Booklet.entitlements; sourceTree = "<group>"; };
 		072135F22A0827BF00BE0925 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		072135F92A0828AD00BE0925 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
-		073F99032A65B9E200EAC47B /* Resources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
+		072135F92A0828AD00BE0925 /* Interface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interface.swift; sourceTree = "<group>"; };
+		073F99032A65B9E200EAC47B /* Knowledge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Knowledge.swift; sourceTree = "<group>"; };
 		073F99052A65CC1200EAC47B /* Font-Booklet-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Font-Booklet-Info.plist"; sourceTree = SOURCE_ROOT; };
 		073F99192A66F24700EAC47B /* Font Booklet Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Font Booklet Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		073F991B2A66F24700EAC47B /* Font_Booklet_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font_Booklet_Tests.swift; sourceTree = "<group>"; };
@@ -83,10 +83,10 @@
 				072135F12A0827BF00BE0925 /* Preview Content */,
 				072135EE2A0827BF00BE0925 /* Assets.xcassets */,
 				072135F02A0827BF00BE0925 /* Font_Booklet.entitlements */,
-				073F99032A65B9E200EAC47B /* Resources.swift */,
 				073F99222A6723FD00EAC47B /* Extensions.swift */,
+				073F99032A65B9E200EAC47B /* Knowledge.swift */,
 				072135EA2A0827BD00BE0925 /* Font_BookletApp.swift */,
-				072135F92A0828AD00BE0925 /* MainView.swift */,
+				072135F92A0828AD00BE0925 /* Interface.swift */,
 			);
 			path = "Font Booklet";
 			sourceTree = "<group>";
@@ -207,8 +207,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				072135FA2A0828AD00BE0925 /* MainView.swift in Sources */,
-				073F99042A65B9E200EAC47B /* Resources.swift in Sources */,
+				072135FA2A0828AD00BE0925 /* Interface.swift in Sources */,
+				073F99042A65B9E200EAC47B /* Knowledge.swift in Sources */,
 				072135EB2A0827BD00BE0925 /* Font_BookletApp.swift in Sources */,
 				073F99232A6723FD00EAC47B /* Extensions.swift in Sources */,
 			);
