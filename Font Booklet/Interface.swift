@@ -154,7 +154,6 @@ struct SampleView: View {
 			BookmarkImage(visible: bookmarked.members.contains(memberName))
 		}
 		.swipeActions_ToggleBookmarked(name: memberName, in: bookmarked)
-//		.contentShape(Rectangle()) // TO DO: Do we need this?
 	}
 }
 
@@ -180,12 +179,17 @@ struct MainView: View {
 	var body: some View {
 		NavigationStack {
 			List(visibleFamilies) { family in
-				SampleView(
-					label: family.surname,
-					memberName: family.members.first!,
-					sampleText: sample)
-				.alignmentGuide(.listRowSeparatorTrailing) { viewDimensions in
-					viewDimensions[.trailing]
+				NavigationLink(value: family) {
+					SampleView(
+						label: family.surname,
+						memberName: family.members.first!,
+						sampleText: sample)
+					.alignmentGuide(.listRowSeparatorTrailing) { viewDimensions in
+						viewDimensions[.trailing]
+					}
+				}
+				.navigationDestination(for: Family.self) { family in
+					Text(family.surname)
 				}
 			}
 			.overlay {
