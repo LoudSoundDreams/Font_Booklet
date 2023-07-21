@@ -196,6 +196,14 @@ struct MainView: View {
 			.navigationBarTitleDisplayMode(.inline)
 			.toolbar {
 				ToolbarItem(placement: .bottomBar) {
+					if filteringToBookmarked {
+						filterButton.buttonStyle(.borderedProminent)
+					} else {
+						filterButton.buttonStyle(.bordered)
+					}
+				}
+				ToolbarItem(placement: .bottomBar) { Spacer() }
+				ToolbarItem(placement: .bottomBar) {
 					Button {
 						editingSample = true
 					} label: {
@@ -208,14 +216,6 @@ struct MainView: View {
 						editSampleTextField
 						editSamplePangramButton
 						editSampleDoneButton
-					}
-				}
-				ToolbarItem(placement: .bottomBar) { Spacer() }
-				ToolbarItem(placement: .bottomBar) {
-					if filteringToBookmarked {
-						filterButton.buttonStyle(.borderedProminent)
-					} else {
-						filterButton.buttonStyle(.bordered)
 					}
 				}
 			}
