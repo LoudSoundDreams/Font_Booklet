@@ -159,7 +159,7 @@ struct MemberView: View {
 
 struct MainView: View {
 	@ObservedObject private var bookmarked: Bookmarked = .shared
-	@State private var sample = Pangrams.standard
+	@AppStorage("SampleText") private var sample: String = Pangrams.standard
 	@State private var editingSample = false
 	@State private var filteringToBookmarked = false
 	var body: some View {
