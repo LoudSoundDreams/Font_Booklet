@@ -144,9 +144,9 @@ struct MainView: View {
 						memberName: family.members.first!,
 						sampleText: sample)
 				}
-				.navigationDestination(for: Family.self) { family in
-					Text("\(family.surname) styles")
-				}
+			}
+			.navigationDestination(for: Family.self) { family in
+				Text("\(family.surname) styles")
 			}
 			.overlay {
 				if visibleFamilies.isEmpty {
