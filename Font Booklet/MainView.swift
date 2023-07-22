@@ -176,6 +176,7 @@ struct MainView: View {
 		}
 		return result
 	}
+	@State private var clearBookmarksConfirmationIsPresented = false
 	var body: some View {
 		NavigationStack {
 			List(visibleFamilies) { family in
@@ -184,12 +185,9 @@ struct MainView: View {
 						label: family.surname,
 						memberName: family.members.first!,
 						sampleText: sample)
-					.alignmentGuide(.listRowSeparatorTrailing) { viewDimensions in
-						viewDimensions[.trailing]
-					}
 				}
 				.navigationDestination(for: Family.self) { family in
-					Text(family.surname)
+					Text("\(family.surname) styles")
 				}
 			}
 			.overlay {
@@ -211,6 +209,29 @@ struct MainView: View {
 			.listStyle(.plain)
 			.navigationTitle("Fonts")
 			.navigationBarTitleDisplayMode(.inline)
+			.toolbar {
+				ToolbarItem(placement: .navigationBarLeading) {
+					Button {
+						clearBookmarksConfirmationIsPresented = true
+					} label: {
+						Image(systemName: "bookmark.slash")
+					}
+					.disabled(bookmarked.members.isEmpty)
+					.confirmationDialog(
+						"",
+						isPresented: $clearBookmarksConfirmationIsPresented,
+						presenting: bookmarked.members.count
+					) { bookmarkCount in
+						Button(
+							"Clear All Bookmarks",
+							role: .destructive
+						) {
+							bookmarked.members.removeAll()
+						}
+						Button("Cancel", role: .cancel) {}
+					}
+				}
+			}
 			.toolbar {
 				ToolbarItem(placement: .bottomBar) { filterButton }
 				ToolbarItem(placement: .bottomBar) { Spacer() }
