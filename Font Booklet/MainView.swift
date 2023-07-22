@@ -49,7 +49,6 @@ final class Bookmarked: ObservableObject {
 
 struct BookmarkImage: View {
 	let visible: Bool
-	
 	var body: some View {
 		ZStack {
 			Image(systemName: "bookmark.fill")
@@ -62,48 +61,7 @@ struct BookmarkImage: View {
 	}
 }
 
-struct TraitCloud: View {
-	let uiFont: UIFont
-	
-	var body: some View {
-		HStack(alignment: .top) {
-			column(with: FontTrait.allCases.filter { !$0.isClass })
-			Spacer()
-			column(with: FontTrait.allCases.filter { $0.isClass })
-		}
-	}
-	
-	@ViewBuilder
-	private func column(with traits: [FontTrait]) -> some View {
-		VStack(alignment: .leading) {
-			ForEach(traits) { trait in
-				let uiFontTraits = uiFont.fontDescriptor.symbolicTraits
-				if uiFontTraits.contains(trait.uiFontDescriptorSymbolicTrait) {
-					Text(trait.displayName)
-						.foregroundStyle(Color.accentColor)
-				} else {
-					Text(trait.displayName)
-						.foregroundStyle(.secondary)
-				}
-			}
-		}
-	}
-}
-
 private extension View {
-	func onTapGesture_ToggleBookmarked(
-		name: String,
-		in bookmarked: Bookmarked
-	) -> some View {
-		onTapGesture {
-			if bookmarked.members.contains(name) {
-				bookmarked.members.remove(name)
-			} else {
-				bookmarked.members.insert(name)
-			}
-		}
-	}
-	
 	func swipeActions_ToggleBookmarked(
 		name: String,
 		in bookmarked: Bookmarked
