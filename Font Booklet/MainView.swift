@@ -241,6 +241,7 @@ struct MainView: View {
 					} label: {
 						Image(systemName: "character.cursor.ibeam")
 					}
+					.disabled(visibleFamilies.isEmpty)
 					.alert(
 						"Sample Text",
 						isPresented: $editingSample
