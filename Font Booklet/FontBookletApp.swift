@@ -7,6 +7,10 @@
 
 import SwiftUI
 
+enum UserDefaultsKey: String {
+	case sampleText = "SampleText"
+}
+
 @main
 struct FontBookletApp: App {
 	var body: some Scene {
