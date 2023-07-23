@@ -177,9 +177,8 @@ struct MainView: View {
 					.disabled(bookmarked.members.isEmpty)
 					.confirmationDialog(
 						"",
-						isPresented: $clearBookmarksConfirmationIsPresented,
-						presenting: bookmarked.members.count
-					) { bookmarkCount in
+						isPresented: $clearBookmarksConfirmationIsPresented
+					) {
 						Button(
 							"Clear All Bookmarks",
 							role: .destructive
