@@ -91,7 +91,7 @@ struct MainView: View {
 	var body: some View {
 		NavigationStack {
 			List(visibleFamilies) { family in
-				NavigationLink(value: family) {
+				if family.members.count <= 1 {
 					SampleView(
 						label: family.surname,
 						memberName: family.members.first!,
@@ -100,6 +100,17 @@ struct MainView: View {
 					.swipeActions_toggleBookmarked(
 						familySurname: family.surname,
 						in: bookmarked)
+				} else {
+					NavigationLink(value: family) {
+						SampleView(
+							label: family.surname,
+							memberName: family.members.first!,
+							sampleText: sample,
+							withBookmark: bookmarked.familySurnames.contains(family.surname))
+						.swipeActions_toggleBookmarked(
+							familySurname: family.surname,
+							in: bookmarked)
+					}
 				}
 			}
 			.navigationDestination(for: Family.self) { family in
