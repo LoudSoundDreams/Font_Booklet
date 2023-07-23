@@ -96,20 +96,30 @@ struct MainView: View {
 						label: family.surname,
 						memberName: family.members.first!,
 						sampleText: sample,
-						withBookmark: bookmarked.familySurnames.contains(family.surname))
+						leavesTrailingSpaceForBookmark: true)
 					.swipeActions_toggleBookmarked(
 						familySurname: family.surname,
 						in: bookmarked)
+					.overlay(alignment: .topTrailing) {
+						if bookmarked.familySurnames.contains(family.surname) {
+							BookmarkImage()
+						}
+					}
 				} else {
 					NavigationLink(value: family) {
 						SampleView(
 							label: family.surname,
 							memberName: family.members.first!,
 							sampleText: sample,
-							withBookmark: bookmarked.familySurnames.contains(family.surname))
+							leavesTrailingSpaceForBookmark: false)
 						.swipeActions_toggleBookmarked(
 							familySurname: family.surname,
 							in: bookmarked)
+					}
+					.overlay(alignment: .topTrailing) {
+						if bookmarked.familySurnames.contains(family.surname) {
+							BookmarkImage()
+						}
 					}
 				}
 			}

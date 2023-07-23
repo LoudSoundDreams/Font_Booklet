@@ -11,7 +11,7 @@ struct SampleView: View {
 	let label: String
 	let memberName: String
 	let sampleText: String
-	let withBookmark: Bool
+	let leavesTrailingSpaceForBookmark: Bool
 	
 	var body: some View {
 		HStack(alignment: .firstTextBaseline) {
@@ -34,23 +34,17 @@ struct SampleView: View {
 					))
 			}
 			Spacer()
-			BookmarkImage(visible: withBookmark)
+			if leavesTrailingSpaceForBookmark {
+				BookmarkImage().hidden()
+			}
 		}
 	}
 }
 
 struct BookmarkImage: View {
-	let visible: Bool
-	
 	var body: some View {
-		ZStack {
-			Image(systemName: "bookmark.fill")
-				.hidden()
-			if visible {
-				Image(systemName: "bookmark.fill")
-					.foregroundStyle(.red)
-			}
-		}
-		.font(.caption)
+		Image(systemName: "bookmark.fill")
+			.foregroundStyle(.red)
+			.font(.caption)
 	}
 }
