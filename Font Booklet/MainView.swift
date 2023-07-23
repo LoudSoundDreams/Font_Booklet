@@ -117,7 +117,7 @@ struct SampleView: View {
 
 struct MainView: View {
 	@ObservedObject private var bookmarked: Bookmarked = .shared
-	@AppStorage(UserDefaultsKey.sampleText.rawValue) private var sample: String = Pangrams.standard
+	@AppStorage(DefaultsKey.sampleText.rawValue) private var sample: String = Pangrams.standard
 	@State private var editingSample = false
 	@State private var filteringToBookmarked = false
 	private var visibleFamilies: [Family] {
