@@ -11,14 +11,30 @@ struct FamilyDetailView: View {
 	let family: Family
 	let sampleText: String
 	
+	private var styledMembers: [String] {
+		Array(family.members.dropFirst())
+	}
 	var body: some View {
-		List(family.members, id: \.self) { member in
-			SampleView(
-				label: member,
-				memberName: member,
-				sampleText: sampleText,
-				withBookmark: false)
+		List {
+			let firstMember = family.members.first!
+			Section {
+				SampleView(
+					label: firstMember,
+					memberName: firstMember,
+					sampleText: sampleText,
+					withBookmark: false)
+			}
+			Section {
+				ForEach(styledMembers, id: \.self) { styledMember in
+					SampleView(
+						label: styledMember,
+						memberName: styledMember,
+						sampleText: sampleText,
+						withBookmark: false)
+				}
+			}
 		}
+		.listStyle(.grouped)
 		.navigationTitle(family.surname)
 	}
 }
