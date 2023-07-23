@@ -61,6 +61,32 @@ struct BookmarkImage: View {
 	}
 }
 
+private extension View {
+	func swipeActions_toggleBookmarked(
+		familySurname: String,
+		in bookmarked: Bookmarked
+	) -> some View {
+		swipeActions(edge: .leading) {
+			if bookmarked.familySurnames.contains(familySurname) {
+				Button {
+					bookmarked.familySurnames.remove(familySurname)
+				} label: {
+					Image(systemName: "bookmark.slash.fill")
+				}
+				.tint(.red)
+			} else {
+				Button {
+					bookmarked.familySurnames.insert(familySurname)
+				} label: {
+					Image(systemName: "bookmark.fill")
+				}
+				.tint(.red)
+				// ! Accessibility label
+			}
+		}
+	}
+}
+
 struct MainView: View {
 	@ObservedObject private var bookmarked: Bookmarked = .shared
 	@AppStorage(DefaultsKey.sampleText.rawValue) private var sample: String = Pangrams.standard
@@ -82,13 +108,18 @@ struct MainView: View {
 				NavigationLink(value: family) {
 					SampleView(
 						label: family.surname,
-						familySurname: family.surname,
 						memberName: family.members.first!,
-						sampleText: sample)
+						sampleText: sample,
+						withBookmark: bookmarked.familySurnames.contains(family.surname))
+					.swipeActions_toggleBookmarked(
+						familySurname: family.surname,
+						in: bookmarked)
 				}
 			}
 			.navigationDestination(for: Family.self) { family in
-				FamilyDetailView(family: family)
+				FamilyDetailView(
+					family: family,
+					sampleText: sample)
 			}
 			.overlay {
 				if visibleFamilies.isEmpty {

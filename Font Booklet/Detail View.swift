@@ -9,9 +9,15 @@ import SwiftUI
 
 struct FamilyDetailView: View {
 	let family: Family
+	let sampleText: String
+	
 	var body: some View {
 		List(family.members, id: \.self) { member in
-			Text(member)
+			SampleView(
+				label: member,
+				memberName: member,
+				sampleText: sampleText,
+				withBookmark: false)
 		}
 		.navigationTitle(family.surname)
 	}
