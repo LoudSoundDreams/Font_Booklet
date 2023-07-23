@@ -13,8 +13,6 @@ struct SampleView: View {
 	let sampleText: String
 	let withBookmark: Bool
 	
-	@ObservedObject private var bookmarked: Bookmarked = .shared
-	
 	var body: some View {
 		HStack(alignment: .top) {
 			VStack(
@@ -43,6 +41,7 @@ struct SampleView: View {
 
 struct BookmarkImage: View {
 	let visible: Bool
+	
 	var body: some View {
 		ZStack {
 			Image(systemName: "bookmark.fill")
