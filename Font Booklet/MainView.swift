@@ -12,36 +12,36 @@ final class Bookmarked: ObservableObject {
 	static let shared = Bookmarked()
 	
 	private static let defaults: UserDefaults = .standard
-	private static let persistentKeyHead = "BookmarkedMember "
-	@Published var members: Set<String> = {
-		let allEntries = Bookmarked.defaults.dictionaryRepresentation()
-		let entriesWithHead = allEntries.keys.filter { key in
-			key.hasPrefix(Bookmarked.persistentKeyHead)
+	@Published var familySurnames: Set<String> = {
+		let allFetchedKeys = Bookmarked.defaults.dictionaryRepresentation().keys
+		let keysWithPrefix = allFetchedKeys.filter { key in
+			key.hasPrefix(DefaultsPrefix.prefix_bookmarkedFamily.rawValue)
 		}
-		let bookmarkedMembers = entriesWithHead.map { entryWithHead in
-			let member = entryWithHead.dropFirst(Bookmarked.persistentKeyHead.count)
-			return String(member)
+		let result = keysWithPrefix.map { key in
+			String(key.dropFirst(DefaultsPrefix.prefix_bookmarkedFamily.rawValue.count))
 		}
-		return Set(bookmarkedMembers)
+		return Set(result)
 	}()
 	{
 		didSet {
-			let currentKeys: [String] = members.map { member in
-				"\(Self.persistentKeyHead)\(member)"
-			}
+			// Delete or create `UserDefaults` entries accordingly
+			let keysToKeep = Set(familySurnames.map { surname in
+				"\(DefaultsPrefix.prefix_bookmarkedFamily.rawValue)\(surname)"
+			})
 			
-			Self.defaults.dictionaryRepresentation().forEach { (fetchedKey, _) in
-				if fetchedKey.hasPrefix(Self.persistentKeyHead)
-					&& !currentKeys.contains(fetchedKey)
-				{
-					Self.defaults.removeObject(forKey: fetchedKey)
+			// Delete
+			Self.defaults.dictionaryRepresentation().keys.forEach { existingKey in
+				guard existingKey.hasPrefix(DefaultsPrefix.prefix_bookmarkedFamily.rawValue) else { return }
+				if !keysToKeep.contains(existingKey) {
+					Self.defaults.removeObject(forKey: existingKey)
 				}
 			}
 			
-			currentKeys.forEach { currentKey in
-				Self.defaults.setValue(
+			// Create
+			keysToKeep.forEach { keyToKeep in
+				Self.defaults.set(
 					true, // Doesn’t actually matter
-					forKey: currentKey)
+					forKey: keyToKeep)
 			}
 		}
 	}
@@ -63,20 +63,20 @@ struct BookmarkImage: View {
 
 private extension View {
 	func swipeActions_ToggleBookmarked(
-		name: String,
+		familySurname: String,
 		in bookmarked: Bookmarked
 	) -> some View {
 		swipeActions(edge: .leading) {
-			if bookmarked.members.contains(name) {
+			if bookmarked.familySurnames.contains(familySurname) {
 				Button {
-					bookmarked.members.remove(name)
+					bookmarked.familySurnames.remove(familySurname)
 				} label: {
 					Image(systemName: "bookmark.slash.fill")
 				}
 				.tint(.red)
 			} else {
 				Button {
-					bookmarked.members.insert(name)
+					bookmarked.familySurnames.insert(familySurname)
 				} label: {
 					Image(systemName: "bookmark.fill")
 				}
@@ -88,6 +88,7 @@ private extension View {
 
 struct SampleView: View {
 	let label: String
+	let familySurname: String
 	let memberName: String
 	let sampleText: String
 	
@@ -109,9 +110,9 @@ struct SampleView: View {
 					))
 			}
 			Spacer()
-			BookmarkImage(visible: bookmarked.members.contains(memberName))
+			BookmarkImage(visible: bookmarked.familySurnames.contains(familySurname))
 		}
-		.swipeActions_ToggleBookmarked(name: memberName, in: bookmarked)
+		.swipeActions_ToggleBookmarked(familySurname: familySurname, in: bookmarked)
 	}
 }
 
@@ -121,18 +122,13 @@ struct MainView: View {
 	@State private var editingSample = false
 	@State private var filteringToBookmarked = false
 	private var visibleFamilies: [Family] {
-		guard filteringToBookmarked else {
+		if filteringToBookmarked {
+			return Family.all.filter {
+				bookmarked.familySurnames.contains($0.surname)
+			}
+		} else {
 			return Family.all
 		}
-		var result: [Family] = []
-		Family.all.forEach { family in
-			let visibleMembers: [String] = family.members.filter { member in
-				bookmarked.members.contains(member)
-			}
-			guard !visibleMembers.isEmpty else { return }
-			result.append(Family(surname: family.surname, members: visibleMembers))
-		}
-		return result
 	}
 	@State private var clearBookmarksConfirmationIsPresented = false
 	var body: some View {
@@ -141,6 +137,7 @@ struct MainView: View {
 				NavigationLink(value: family) {
 					SampleView(
 						label: family.surname,
+						familySurname: family.surname,
 						memberName: family.members.first!,
 						sampleText: sample)
 				}
@@ -174,7 +171,7 @@ struct MainView: View {
 					} label: {
 						Image(systemName: "bookmark.slash")
 					}
-					.disabled(bookmarked.members.isEmpty)
+					.disabled(bookmarked.familySurnames.isEmpty)
 					.confirmationDialog(
 						"",
 						isPresented: $clearBookmarksConfirmationIsPresented
@@ -183,7 +180,7 @@ struct MainView: View {
 							"Clear All Bookmarks",
 							role: .destructive
 						) {
-							bookmarked.members.removeAll()
+							bookmarked.familySurnames.removeAll()
 						}
 						Button("Cancel", role: .cancel) {}
 					}
