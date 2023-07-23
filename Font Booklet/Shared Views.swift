@@ -14,7 +14,7 @@ struct SampleView: View {
 	let withBookmark: Bool
 	
 	var body: some View {
-		HStack(alignment: .top) {
+		HStack(alignment: .firstTextBaseline) {
 			VStack(
 				alignment: .leading,
 				spacing: .eight
@@ -51,5 +51,6 @@ struct BookmarkImage: View {
 					.foregroundStyle(.red)
 			}
 		}
+		.font(.caption)
 	}
 }
