@@ -146,7 +146,7 @@ struct MainView: View {
 				}
 			}
 			.navigationDestination(for: Family.self) { family in
-				Text("\(family.surname) styles")
+				FamilyDetailView(family: family)
 			}
 			.overlay {
 				if visibleFamilies.isEmpty {
