@@ -81,6 +81,7 @@ private extension View {
 					Image(systemName: "bookmark.fill")
 				}
 				.tint(.red)
+				// ! Accessibility label
 			}
 		}
 	}
