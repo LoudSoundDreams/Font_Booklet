@@ -24,7 +24,12 @@ struct SampleView: View {
 				Text(label)
 					.font(.caption)
 					.foregroundColor(.secondary)
-				Text(sampleText)
+				Text({ () -> String in
+					if sampleText.isEmpty {
+						return Pangrams.standard
+					}
+					return sampleText
+				}())
 					.font(.custom(
 						memberName,
 						size: .eight * 4
