@@ -105,7 +105,7 @@ struct SampleView: View {
 				Text(sampleText)
 					.font(.custom(
 						memberName,
-						size: .eight * 3
+						size: .eight * 4
 					))
 			}
 			Spacer()
