@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-enum UserDefaultsKey: String {
+enum DefaultsKey: String {
 	case sampleText = "SampleText"
 }
 
