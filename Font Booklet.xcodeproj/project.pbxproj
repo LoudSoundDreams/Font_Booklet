@@ -15,6 +15,7 @@
 		073F991C2A66F24700EAC47B /* FontBookletTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073F991B2A66F24700EAC47B /* FontBookletTests.swift */; };
 		073F99232A6723FD00EAC47B /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073F99222A6723FD00EAC47B /* Extensions.swift */; };
 		076AFA322A6D363800E30563 /* Detail View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076AFA312A6D363800E30563 /* Detail View.swift */; };
+		076AFA342A6D50FF00E30563 /* Shared Views.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076AFA332A6D50FF00E30563 /* Shared Views.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,7 @@
 		073F991B2A66F24700EAC47B /* FontBookletTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontBookletTests.swift; sourceTree = "<group>"; };
 		073F99222A6723FD00EAC47B /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		076AFA312A6D363800E30563 /* Detail View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Detail View.swift"; sourceTree = "<group>"; };
+		076AFA332A6D50FF00E30563 /* Shared Views.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Shared Views.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +90,7 @@
 				073F99222A6723FD00EAC47B /* Extensions.swift */,
 				073F99032A65B9E200EAC47B /* Knowledge.swift */,
 				072135EA2A0827BD00BE0925 /* FontBookletApp.swift */,
+				076AFA332A6D50FF00E30563 /* Shared Views.swift */,
 				072135F92A0828AD00BE0925 /* MainView.swift */,
 				076AFA312A6D363800E30563 /* Detail View.swift */,
 			);
@@ -212,6 +215,7 @@
 			files = (
 				072135FA2A0828AD00BE0925 /* MainView.swift in Sources */,
 				073F99042A65B9E200EAC47B /* Knowledge.swift in Sources */,
+				076AFA342A6D50FF00E30563 /* Shared Views.swift in Sources */,
 				076AFA322A6D363800E30563 /* Detail View.swift in Sources */,
 				072135EB2A0827BD00BE0925 /* FontBookletApp.swift in Sources */,
 				073F99232A6723FD00EAC47B /* Extensions.swift in Sources */,
