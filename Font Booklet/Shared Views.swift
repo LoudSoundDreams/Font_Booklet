@@ -35,3 +35,17 @@ struct SampleView: View {
 		}
 	}
 }
+
+struct BookmarkImage: View {
+	let visible: Bool
+	var body: some View {
+		ZStack {
+			Image(systemName: "bookmark.fill")
+				.hidden()
+			if visible {
+				Image(systemName: "bookmark.fill")
+					.foregroundStyle(.red)
+			}
+		}
+	}
+}
