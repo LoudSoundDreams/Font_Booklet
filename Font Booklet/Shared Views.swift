@@ -47,6 +47,7 @@ struct SampleView: View {
 			}
 		}
 		.accessibilityElement(children: .combine)
+		.accessibilityInputLabels([label])
 	}
 }
 
