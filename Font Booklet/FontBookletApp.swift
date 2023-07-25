@@ -5,7 +5,9 @@
 //  Created by h on 2023-05-07.
 //
 
-import SwiftUI
+extension CGFloat {
+	static let eight: Self = 8
+}
 
 enum DefaultsKey: String, CaseIterable {
 	case sampleText = "SampleText"
@@ -13,6 +15,8 @@ enum DefaultsKey: String, CaseIterable {
 enum DefaultsPrefix: String, CaseIterable {
 	case prefix_bookmarkedFamily = "BookmarkedFamily:"
 }
+
+import SwiftUI
 
 @main
 struct FontBookletApp: App {
