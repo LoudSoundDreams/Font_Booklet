@@ -12,6 +12,7 @@ struct SampleView: View {
 	let memberName: String
 	let sampleText: String
 	let leavesTrailingSpaceForBookmark: Bool
+	let accessibilityValueBookmarked: Bool
 	
 	var body: some View {
 		HStack(alignment: .firstTextBaseline) {
@@ -22,6 +23,13 @@ struct SampleView: View {
 				Text(label)
 					.font(.caption)
 					.foregroundColor(.secondary)
+					.accessibilityLabel({ () -> String in
+						if accessibilityValueBookmarked {
+							return "\(InterfaceString.bookmarked), \(label)"
+						} else {
+							return label
+						}
+					}())
 				Text({ () -> String in
 					if sampleText.isEmpty {
 						return Pangrams.standard

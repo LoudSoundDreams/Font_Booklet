@@ -22,7 +22,8 @@ struct FamilyDetailView: View {
 					label: firstMember,
 					memberName: firstMember,
 					sampleText: sampleText,
-					leavesTrailingSpaceForBookmark: false)
+					leavesTrailingSpaceForBookmark: false,
+					accessibilityValueBookmarked: false)
 			}
 			Section {
 				ForEach(styledMembers, id: \.self) { styledMember in
@@ -30,7 +31,8 @@ struct FamilyDetailView: View {
 						label: styledMember,
 						memberName: styledMember,
 						sampleText: sampleText,
-						leavesTrailingSpaceForBookmark: false)
+						leavesTrailingSpaceForBookmark: false,
+						accessibilityValueBookmarked: false)
 				}
 			}
 		}

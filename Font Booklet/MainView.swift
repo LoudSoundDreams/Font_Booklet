@@ -58,6 +58,7 @@ private extension View {
 					bookmarked.familySurnames.remove(familySurname)
 				} label: {
 					Image(systemName: "bookmark.slash.fill")
+						.accessibilityLabel("Unbookmark")
 				}
 				.tint(.red)
 			} else {
@@ -67,7 +68,6 @@ private extension View {
 					Image(systemName: "bookmark.fill")
 				}
 				.tint(.red)
-				// ! Accessibility label
 			}
 		}
 	}
@@ -96,7 +96,9 @@ struct MainView: View {
 						label: family.surname,
 						memberName: family.members.first!,
 						sampleText: sample,
-						leavesTrailingSpaceForBookmark: true)
+						leavesTrailingSpaceForBookmark: true,
+						accessibilityValueBookmarked: bookmarked.familySurnames.contains(family.surname)
+					)
 					.swipeActions_toggleBookmarked(
 						familySurname: family.surname,
 						in: bookmarked)
@@ -106,18 +108,15 @@ struct MainView: View {
 						}
 					}
 					.accessibilityElement(children: .combine)
-					.accessibilityValue( // TO DO: Read this before the sample text.
-						bookmarked.familySurnames.contains(family.surname)
-						? InterfaceString.bookmarked
-						: ""
-					)
 				} else {
 					NavigationLink(value: family) {
 						SampleView(
 							label: family.surname,
 							memberName: family.members.first!,
 							sampleText: sample,
-							leavesTrailingSpaceForBookmark: false)
+							leavesTrailingSpaceForBookmark: false,
+							accessibilityValueBookmarked: bookmarked.familySurnames.contains(family.surname)
+						)
 						.swipeActions_toggleBookmarked(
 							familySurname: family.surname,
 							in: bookmarked)
@@ -129,11 +128,6 @@ struct MainView: View {
 						}
 					}
 					.accessibilityElement(children: .combine)
-					.accessibilityValue( // TO DO: Read this before the sample text.
-						bookmarked.familySurnames.contains(family.surname)
-						? InterfaceString.bookmarked
-						: ""
-					)
 				}
 			}
 			.navigationDestination(for: Family.self) { family in
