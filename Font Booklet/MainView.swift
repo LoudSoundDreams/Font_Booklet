@@ -105,6 +105,12 @@ struct MainView: View {
 							BookmarkImage()
 						}
 					}
+					.accessibilityElement(children: .combine)
+					.accessibilityValue( // TO DO: Read this before the sample text.
+						bookmarked.familySurnames.contains(family.surname)
+						? InterfaceString.bookmarked
+						: ""
+					)
 				} else {
 					NavigationLink(value: family) {
 						SampleView(
@@ -119,8 +125,15 @@ struct MainView: View {
 					.overlay(alignment: .topTrailing) {
 						if bookmarked.familySurnames.contains(family.surname) {
 							BookmarkImage()
+								.accessibilityHidden(true)
 						}
 					}
+					.accessibilityElement(children: .combine)
+					.accessibilityValue( // TO DO: Read this before the sample text.
+						bookmarked.familySurnames.contains(family.surname)
+						? InterfaceString.bookmarked
+						: ""
+					)
 				}
 			}
 			.navigationDestination(for: Family.self) { family in
@@ -142,6 +155,7 @@ struct MainView: View {
 					}
 					.multilineTextAlignment(.center)
 					.padding()
+					.accessibilityElement(children: .combine)
 				}
 			}
 			.listStyle(.plain)
@@ -154,13 +168,14 @@ struct MainView: View {
 					} label: {
 						Image(systemName: "bookmark.slash")
 					}
+					.accessibilityLabel(InterfaceString.clearAllBookmarks)
 					.disabled(bookmarked.familySurnames.isEmpty)
 					.confirmationDialog(
 						"",
 						isPresented: $clearBookmarksConfirmationIsPresented
 					) {
 						Button(
-							"Clear All Bookmarks",
+							InterfaceString.clearAllBookmarks,
 							role: .destructive
 						) {
 							bookmarked.familySurnames.removeAll()
@@ -178,6 +193,7 @@ struct MainView: View {
 					} label: {
 						Image(systemName: "character.cursor.ibeam")
 					}
+					.accessibilityLabel("Edit sample text")
 					.disabled(visibleFamilies.isEmpty)
 					.alert(
 						"Sample Text",
@@ -202,6 +218,11 @@ struct MainView: View {
 				Image(systemName: "line.3.horizontal.decrease.circle")
 			}
 		}
+		.accessibilityLabel(
+			filteringToBookmarked
+			? "Toggle Filter, on"
+			: "Toggle Filter, off"
+		)
 	}
 	
 	private var editSampleTextField: some View {

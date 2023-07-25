@@ -16,6 +16,11 @@ enum DefaultsPrefix: String, CaseIterable {
 	case prefix_bookmarkedFamily = "BookmarkedFamily:"
 }
 
+enum InterfaceString {
+	static let bookmarked = "Bookmarked"
+	static let clearAllBookmarks = "Clear All Bookmarks"
+}
+
 import SwiftUI
 
 @main
