@@ -43,7 +43,7 @@ enum KnownFamily: String, CaseIterable {
 					"BoldItalicMT",
 				]
 			case .damascus:
-				// !
+				// Wrong
 				return [
 					"",
 					"",
@@ -57,7 +57,7 @@ enum KnownFamily: String, CaseIterable {
 					"W6",
 				]
 			case .stixTwo:
-				// !
+				// Wrong
 				return [
 					"",
 					"Italic",
