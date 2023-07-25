@@ -217,6 +217,7 @@ struct MainView: View {
 			? "Toggle Filter, on"
 			: "Toggle Filter, off"
 		)
+		.accessibilityInputLabels(["Toggle Filter"])
 	}
 	
 	private var editSampleTextField: some View {
