@@ -81,15 +81,15 @@
 		072135E92A0827BD00BE0925 /* Font Booklet */ = {
 			isa = PBXGroup;
 			children = (
-				073F99052A65CC1200EAC47B /* Font-Booklet-Info.plist */,
-				072135F12A0827BF00BE0925 /* Preview Content */,
-				072135EE2A0827BF00BE0925 /* Assets.xcassets */,
-				072135F02A0827BF00BE0925 /* Font_Booklet.entitlements */,
-				073F99032A65B9E200EAC47B /* Knowledge.swift */,
 				072135EA2A0827BD00BE0925 /* FontBookletApp.swift */,
-				076AFA332A6D50FF00E30563 /* Shared Views.swift */,
 				072135F92A0828AD00BE0925 /* MainView.swift */,
 				076AFA312A6D363800E30563 /* Detail View.swift */,
+				076AFA332A6D50FF00E30563 /* Shared Views.swift */,
+				073F99032A65B9E200EAC47B /* Knowledge.swift */,
+				072135EE2A0827BF00BE0925 /* Assets.xcassets */,
+				072135F12A0827BF00BE0925 /* Preview Content */,
+				073F99052A65CC1200EAC47B /* Font-Booklet-Info.plist */,
+				072135F02A0827BF00BE0925 /* Font_Booklet.entitlements */,
 			);
 			path = "Font Booklet";
 			sourceTree = "<group>";
