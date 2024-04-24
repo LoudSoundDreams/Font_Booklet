@@ -9,9 +9,9 @@ enum Pangrams {
 	static let standard = "The quick brown fox jumps over the lazy dog."
 	static let mysteryBag: [String] = [
 		"Amazingly few discotheques provide jukeboxes.", // Fewest words
-		"Brown jars prevented the mixture from freezing quickly.",
 		"Farmer Jack realized the big yellow quilt was expensive.", // Close to one that aired on “Jeopardy!”
 		"Grumpy wizards make toxic brew for the jovial queen.",
+		"Pack my box with five dozen liquor jugs.",
 		"Quick-blowing zephyrs vex daft Jim.",
 		"Watch “Jeopardy!”, Alex Trebek’s fun TV quiz game.", // Includes quotation marks
 	]
