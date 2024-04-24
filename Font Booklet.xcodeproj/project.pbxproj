@@ -15,6 +15,7 @@
 		073F991C2A66F24700EAC47B /* FontBookletTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073F991B2A66F24700EAC47B /* FontBookletTests.swift */; };
 		076AFA322A6D363800E30563 /* Detail View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076AFA312A6D363800E30563 /* Detail View.swift */; };
 		076AFA342A6D50FF00E30563 /* Shared Views.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076AFA332A6D50FF00E30563 /* Shared Views.swift */; };
+		07DD66A12BD8DF2200582514 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 07DD66A02BD8DF2200582514 /* PrivacyInfo.xcprivacy */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,7 @@
 		073F991B2A66F24700EAC47B /* FontBookletTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontBookletTests.swift; sourceTree = "<group>"; };
 		076AFA312A6D363800E30563 /* Detail View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Detail View.swift"; sourceTree = "<group>"; };
 		076AFA332A6D50FF00E30563 /* Shared Views.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Shared Views.swift"; sourceTree = "<group>"; };
+		07DD66A02BD8DF2200582514 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +92,7 @@
 				072135F12A0827BF00BE0925 /* Preview Content */,
 				073F99052A65CC1200EAC47B /* Font-Booklet-Info.plist */,
 				072135F02A0827BF00BE0925 /* Font_Booklet.entitlements */,
+				07DD66A02BD8DF2200582514 /* PrivacyInfo.xcprivacy */,
 			);
 			path = "Font Booklet";
 			sourceTree = "<group>";
@@ -191,6 +194,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				07DD66A12BD8DF2200582514 /* PrivacyInfo.xcprivacy in Resources */,
 				072135F32A0827BF00BE0925 /* Preview Assets.xcassets in Resources */,
 				072135EF2A0827BF00BE0925 /* Assets.xcassets in Resources */,
 			);
@@ -357,7 +361,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Font Booklet/Font_Booklet.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 23;
+				CURRENT_PROJECT_VERSION = 24;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Font Booklet/Preview Content\"";
 				DEVELOPMENT_TEAM = DN5BFUM2N5;
@@ -400,7 +404,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Font Booklet/Font_Booklet.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 23;
+				CURRENT_PROJECT_VERSION = 24;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Font Booklet/Preview Content\"";
 				DEVELOPMENT_TEAM = DN5BFUM2N5;
