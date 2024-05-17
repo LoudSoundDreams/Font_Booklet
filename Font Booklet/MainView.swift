@@ -58,7 +58,7 @@ private extension View {
 					bookmarked.familySurnames.remove(familySurname)
 				} label: {
 					Image(systemName: "bookmark.slash.fill")
-						.accessibilityLabel("Unbookmark")
+						.accessibilityLabel(InterfaceText.unbookmark)
 				}
 				.tint(.red)
 			} else {
@@ -142,9 +142,9 @@ struct MainView: View {
 						Image(systemName: "bookmark.fill")
 							.foregroundStyle(.secondary)
 							.font(.largeTitle)
-						Text("No Bookmarks")
+						Text(InterfaceText.noBookmarks)
 							.font(.title)
-						Text("Swipe right on a font to bookmark it.")
+						Text(InterfaceText._howToBookmark)
 							.foregroundStyle(.secondary)
 					}
 					.multilineTextAlignment(.center)
@@ -153,7 +153,7 @@ struct MainView: View {
 				}
 			}
 			.listStyle(.plain)
-			.navigationTitle("Fonts")
+			.navigationTitle(InterfaceText.fonts)
 			.navigationBarTitleDisplayMode(.inline)
 			.toolbar {
 				ToolbarItem(placement: .navigationBarLeading) {
@@ -174,7 +174,7 @@ struct MainView: View {
 						) {
 							bookmarked.familySurnames.removeAll()
 						}
-						Button("Cancel", role: .cancel) {}
+						Button(InterfaceText.cancel, role: .cancel) {}
 					}
 				}
 			}
@@ -187,10 +187,10 @@ struct MainView: View {
 					} label: {
 						Image(systemName: "character.cursor.ibeam")
 					}
-					.accessibilityLabel("Edit sample text")
+					.accessibilityLabel(InterfaceText.editSampleText_axLabel)
 					.disabled(visibleFamilies.isEmpty)
 					.alert(
-						"Sample Text",
+						InterfaceText.sampleText,
 						isPresented: $editingSample
 					) {
 						editSampleTextField
@@ -214,10 +214,10 @@ struct MainView: View {
 		}
 		.accessibilityLabel(
 			filteringToBookmarked
-			? "Toggle Filter, on"
-			: "Toggle Filter, off"
+			? InterfaceText._filterIsOn_axLabel
+			: InterfaceText._filterIsOn_axLabel
 		)
-		.accessibilityInputLabels(["Toggle Filter"])
+		.accessibilityInputLabels([InterfaceText.toggleFilter])
 	}
 	
 	private var editSampleTextField: some View {
@@ -229,7 +229,7 @@ struct MainView: View {
 		}
 	}
 	private var editSamplePangramButton: some View {
-		Button("Pangram!") {
+		Button(InterfaceText.pangram_exclamationMark) {
 			var newSample = sample
 			while newSample == sample {
 				newSample = Pangrams.mysteryBag.randomElement()!
@@ -238,7 +238,7 @@ struct MainView: View {
 		}
 	}
 	private var editSampleDoneButton: some View {
-		Button("Done") {
+		Button(InterfaceText.done) {
 			if sample.isEmpty {
 				sample = Pangrams.standard
 			}
