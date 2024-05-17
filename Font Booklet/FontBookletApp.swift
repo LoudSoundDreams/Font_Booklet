@@ -17,6 +17,8 @@ enum DefaultsPrefix: String, CaseIterable {
 }
 
 enum InterfaceText {
+	// Include “_” if the string doesn’t match the constant’s name.
+	
 	static let done = "Done"
 	static let cancel = "Cancel"
 	
@@ -42,18 +44,14 @@ import SwiftUI
 @main
 struct FontBookletApp: App {
 	init() {
+		// Clean up after ourselves; leave no unused data in persistent storage.
 		let defaults = UserDefaults.standard
 		let keysToKeep = Set(DefaultsKey.allCases.map { $0.rawValue })
 		let prefixesToKeep = DefaultsPrefix.allCases.map { $0.rawValue }
 		defaults.dictionaryRepresentation().forEach { (existingKey, _) in
-			// Keep the entry only if we’re still using it; otherwise, delete it.
-			
 			if keysToKeep.contains(existingKey) { return }
-			
 			for prefixToKeep in prefixesToKeep {
-				if existingKey.hasPrefix(prefixToKeep) {
-					return
-				}
+				if existingKey.hasPrefix(prefixToKeep) { return }
 			}
 			
 			defaults.removeObject(forKey: existingKey)

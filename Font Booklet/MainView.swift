@@ -8,10 +8,8 @@
 import SwiftUI
 
 final class Bookmarked: ObservableObject {
-	private init() {}
 	static let shared = Bookmarked()
-	
-	private static let defaults: UserDefaults = .standard
+	private init() {}
 	@Published var familySurnames: Set<String> = {
 		let allFetchedKeys = Bookmarked.defaults.dictionaryRepresentation().keys
 		let keysWithPrefix = allFetchedKeys.filter { key in
@@ -21,8 +19,7 @@ final class Bookmarked: ObservableObject {
 			String(key.dropFirst(DefaultsPrefix.prefix_bookmarkedFamily.rawValue.count))
 		}
 		return Set(result)
-	}()
-	{
+	}() {
 		didSet {
 			// Delete or create `UserDefaults` entries accordingly
 			let keysToKeep = Set(familySurnames.map { surname in
@@ -31,20 +28,20 @@ final class Bookmarked: ObservableObject {
 			
 			// Delete
 			Self.defaults.dictionaryRepresentation().keys.forEach { existingKey in
-				guard existingKey.hasPrefix(DefaultsPrefix.prefix_bookmarkedFamily.rawValue) else { return }
-				if !keysToKeep.contains(existingKey) {
-					Self.defaults.removeObject(forKey: existingKey)
-				}
+				guard
+					existingKey.hasPrefix(DefaultsPrefix.prefix_bookmarkedFamily.rawValue),
+					!keysToKeep.contains(existingKey)
+				else { return }
+				Self.defaults.removeObject(forKey: existingKey)
 			}
 			
 			// Create
 			keysToKeep.forEach { keyToKeep in
-				Self.defaults.set(
-					true, // Doesn’t actually matter
-					forKey: keyToKeep)
+				Self.defaults.set(true, forKey: keyToKeep) // Value doesn’t actually matter
 			}
 		}
 	}
+	private static let defaults: UserDefaults = .standard
 }
 
 private extension View {
@@ -57,17 +54,14 @@ private extension View {
 				Button {
 					bookmarked.familySurnames.remove(familySurname)
 				} label: {
-					Image(systemName: "bookmark.slash.fill")
-						.accessibilityLabel(InterfaceText.unbookmark)
-				}
-				.tint(.red)
+					Image(systemName: "bookmark.slash.fill").accessibilityLabel(InterfaceText.unbookmark)
+				}.tint(.red)
 			} else {
 				Button {
 					bookmarked.familySurnames.insert(familySurname)
 				} label: {
 					Image(systemName: "bookmark.fill")
-				}
-				.tint(.red)
+				}.tint(.red)
 			}
 		}
 	}
@@ -80,28 +74,24 @@ struct MainView: View {
 	@State private var filteringToBookmarked = false
 	private var visibleFamilies: [Family] {
 		if filteringToBookmarked {
-			return Family.all.filter {
-				bookmarked.familySurnames.contains($0.surname)
-			}
-		} else {
-			return Family.all
+			return Family.all.filter { bookmarked.familySurnames.contains($0.surname) }
 		}
+		return Family.all
 	}
 	@State private var clearBookmarksConfirmationIsPresented = false
 	var body: some View {
 		NavigationStack {
 			List(visibleFamilies) { family in
+				// Make the row tappable and show a chevron on it only if the family has multiple members.
+				// It’d be nice to deduplicate this code.
 				if family.members.count <= 1 {
 					SampleView(
 						label: family.surname,
 						memberName: family.members.first!,
 						sampleText: sample,
 						leavesTrailingSpaceForBookmark: true,
-						accessibilityValueBookmarked: bookmarked.familySurnames.contains(family.surname)
-					)
-					.swipeActions_toggleBookmarked(
-						familySurname: family.surname,
-						in: bookmarked)
+						accessibilityValueBookmarked: bookmarked.familySurnames.contains(family.surname))
+					.swipeActions_toggleBookmarked(familySurname: family.surname, in: bookmarked)
 					.overlay(alignment: .topTrailing) {
 						if bookmarked.familySurnames.contains(family.surname) {
 							BookmarkImage()
@@ -115,25 +105,19 @@ struct MainView: View {
 							memberName: family.members.first!,
 							sampleText: sample,
 							leavesTrailingSpaceForBookmark: false,
-							accessibilityValueBookmarked: bookmarked.familySurnames.contains(family.surname)
-						)
-						.swipeActions_toggleBookmarked(
-							familySurname: family.surname,
-							in: bookmarked)
+							accessibilityValueBookmarked: bookmarked.familySurnames.contains(family.surname))
+						.swipeActions_toggleBookmarked(familySurname: family.surname, in: bookmarked)
 					}
 					.overlay(alignment: .topTrailing) {
 						if bookmarked.familySurnames.contains(family.surname) {
-							BookmarkImage()
-								.accessibilityHidden(true)
+							BookmarkImage().accessibilityHidden(true)
 						}
 					}
 					.accessibilityElement(children: .combine)
 				}
 			}
 			.navigationDestination(for: Family.self) { family in
-				FamilyDetailView(
-					family: family,
-					sampleText: sample)
+				FamilyDetailView(family: family, sampleText: sample)
 			}
 			.overlay {
 				if visibleFamilies.isEmpty {
@@ -164,14 +148,8 @@ struct MainView: View {
 					}
 					.accessibilityLabel(InterfaceText.clearAllBookmarks)
 					.disabled(bookmarked.familySurnames.isEmpty)
-					.confirmationDialog(
-						"",
-						isPresented: $clearBookmarksConfirmationIsPresented
-					) {
-						Button(
-							InterfaceText.clearAllBookmarks,
-							role: .destructive
-						) {
+					.confirmationDialog("", isPresented: $clearBookmarksConfirmationIsPresented) {
+						Button(InterfaceText.clearAllBookmarks, role: .destructive) {
 							bookmarked.familySurnames.removeAll()
 						}
 						Button(InterfaceText.cancel, role: .cancel) {}
@@ -189,10 +167,7 @@ struct MainView: View {
 					}
 					.accessibilityLabel(InterfaceText.editSampleText_axLabel)
 					.disabled(visibleFamilies.isEmpty)
-					.alert(
-						InterfaceText.sampleText,
-						isPresented: $editingSample
-					) {
+					.alert(InterfaceText.sampleText, isPresented: $editingSample) {
 						editSampleTextField
 						editSamplePangramButton
 						editSampleDoneButton
@@ -212,19 +187,12 @@ struct MainView: View {
 				Image(systemName: "line.3.horizontal.decrease.circle")
 			}
 		}
-		.accessibilityLabel(
-			filteringToBookmarked
-			? InterfaceText._filterIsOn_axLabel
-			: InterfaceText._filterIsOn_axLabel
-		)
+		.accessibilityLabel(filteringToBookmarked ? InterfaceText._filterIsOn_axLabel : InterfaceText._filterIsOn_axLabel)
 		.accessibilityInputLabels([InterfaceText.toggleFilter])
 	}
 	
 	private var editSampleTextField: some View {
-		TextField(
-			text: $sample,
-			prompt: Text(Pangrams.standard)
-		) {
+		TextField(text: $sample, prompt: Text(Pangrams.standard)) {
 			let _ = UITextField.appearance().clearButtonMode = .whileEditing
 		}
 	}
@@ -242,7 +210,6 @@ struct MainView: View {
 			if sample.isEmpty {
 				sample = Pangrams.standard
 			}
-		}
-		.keyboardShortcut(.defaultAction)
+		}.keyboardShortcut(.defaultAction)
 	}
 }
