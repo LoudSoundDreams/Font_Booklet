@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		072135EB2A0827BD00BE0925 /* FontBookletApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072135EA2A0827BD00BE0925 /* FontBookletApp.swift */; };
+		072135EB2A0827BD00BE0925 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072135EA2A0827BD00BE0925 /* App.swift */; };
 		072135EF2A0827BF00BE0925 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 072135EE2A0827BF00BE0925 /* Assets.xcassets */; };
 		072135F32A0827BF00BE0925 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 072135F22A0827BF00BE0925 /* Preview Assets.xcassets */; };
-		072135FA2A0828AD00BE0925 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072135F92A0828AD00BE0925 /* MainView.swift */; };
+		072135FA2A0828AD00BE0925 /* Main View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072135F92A0828AD00BE0925 /* Main View.swift */; };
 		073F99042A65B9E200EAC47B /* Knowledge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073F99032A65B9E200EAC47B /* Knowledge.swift */; };
 		073F991C2A66F24700EAC47B /* FontBookletTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073F991B2A66F24700EAC47B /* FontBookletTests.swift */; };
 		076AFA322A6D363800E30563 /* Detail View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076AFA312A6D363800E30563 /* Detail View.swift */; };
@@ -31,11 +31,11 @@
 
 /* Begin PBXFileReference section */
 		072135E72A0827BD00BE0925 /* Font Booklet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Font Booklet.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		072135EA2A0827BD00BE0925 /* FontBookletApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontBookletApp.swift; sourceTree = "<group>"; };
+		072135EA2A0827BD00BE0925 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		072135EE2A0827BF00BE0925 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		072135F02A0827BF00BE0925 /* Font_Booklet.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Font_Booklet.entitlements; sourceTree = "<group>"; };
 		072135F22A0827BF00BE0925 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		072135F92A0828AD00BE0925 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		072135F92A0828AD00BE0925 /* Main View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Main View.swift"; sourceTree = "<group>"; };
 		073F99032A65B9E200EAC47B /* Knowledge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Knowledge.swift; sourceTree = "<group>"; };
 		073F99052A65CC1200EAC47B /* Font-Booklet-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Font-Booklet-Info.plist"; sourceTree = SOURCE_ROOT; };
 		073F99192A66F24700EAC47B /* Font Booklet Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Font Booklet Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -86,11 +86,11 @@
 			isa = PBXGroup;
 			children = (
 				07B325BF2BF708BC00E80BF7 /* Constants.swift */,
-				072135EA2A0827BD00BE0925 /* FontBookletApp.swift */,
-				072135F92A0828AD00BE0925 /* MainView.swift */,
+				073F99032A65B9E200EAC47B /* Knowledge.swift */,
+				072135EA2A0827BD00BE0925 /* App.swift */,
+				072135F92A0828AD00BE0925 /* Main View.swift */,
 				076AFA312A6D363800E30563 /* Detail View.swift */,
 				076AFA332A6D50FF00E30563 /* Shared Views.swift */,
-				073F99032A65B9E200EAC47B /* Knowledge.swift */,
 				072135EE2A0827BF00BE0925 /* Assets.xcassets */,
 				072135F12A0827BF00BE0925 /* Preview Content */,
 				073F99052A65CC1200EAC47B /* Font-Booklet-Info.plist */,
@@ -217,11 +217,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				072135FA2A0828AD00BE0925 /* MainView.swift in Sources */,
+				072135FA2A0828AD00BE0925 /* Main View.swift in Sources */,
 				073F99042A65B9E200EAC47B /* Knowledge.swift in Sources */,
 				076AFA342A6D50FF00E30563 /* Shared Views.swift in Sources */,
 				076AFA322A6D363800E30563 /* Detail View.swift in Sources */,
-				072135EB2A0827BD00BE0925 /* FontBookletApp.swift in Sources */,
+				072135EB2A0827BD00BE0925 /* App.swift in Sources */,
 				07B325C02BF708BC00E80BF7 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -3,7 +3,7 @@
 import SwiftUI
 
 @main
-struct FontBookletApp: App {
+struct FontBooklet: App {
 	init() {
 		// Clean up after ourselves; leave no unused data in persistent storage.
 		let defaults = UserDefaults.standard
