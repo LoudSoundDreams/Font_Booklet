@@ -19,14 +19,9 @@ enum Pangrams {
 
 import UIKit
 
-extension Family: Identifiable {
-	var id: String { surname }
-}
-extension Family: Hashable {}
 struct Family {
 	let surname: String
 	let members: [String]
-	
 	static let all: [Self] = {
 		var result: [Self] = []
 		let surnames = UIFont.familyNames // ["Trebuchet MS", "Verdana"]
@@ -37,10 +32,11 @@ struct Family {
 		return result
 	}()
 }
-
-extension FontTrait: Identifiable {
-	var id: Self { self }
+extension Family: Identifiable {
+	var id: String { surname }
 }
+extension Family: Hashable {}
+
 enum FontTrait: CaseIterable {
 	// “Traits”
 	case italic
@@ -164,4 +160,7 @@ enum FontTrait: CaseIterable {
 				return "Symbolic"
 		}
 	}
+}
+extension FontTrait: Identifiable {
+	var id: Self { self }
 }

@@ -13,33 +13,19 @@ struct SampleView: View {
 	let sampleText: String
 	let leavesTrailingSpaceForBookmark: Bool
 	let accessibilityValueBookmarked: Bool
-	
 	var body: some View {
 		HStack(alignment: .firstTextBaseline) {
-			VStack(
-				alignment: .leading,
-				spacing: .eight
-			) {
+			VStack(alignment: .leading, spacing: .eight) {
 				Text(label)
 					.font(.caption)
 					.foregroundColor(.secondary)
-					.accessibilityLabel({ () -> String in
-						if accessibilityValueBookmarked {
-							return "\(InterfaceText.bookmarked), \(label)"
-						} else {
-							return label
-						}
-					}())
-				Text({ () -> String in
-					if sampleText.isEmpty {
-						return Pangrams.standard
-					}
-					return sampleText
-				}())
-					.font(.custom(
-						memberName,
-						size: .eight * 4
-					))
+					.accessibilityLabel(
+						accessibilityValueBookmarked
+						? "\(InterfaceText.bookmarked), \(label)"
+						: label
+					)
+				Text(sampleText.isEmpty ? Pangrams.standard : sampleText)
+					.font(.custom(memberName, size: .eight * 4))
 			}
 			Spacer()
 			if leavesTrailingSpaceForBookmark {
