@@ -116,11 +116,7 @@ struct MainView: View {
 		Button {
 			filteringToBookmarked.toggle()
 		} label: {
-			if filteringToBookmarked {
-				Image(systemName: "line.3.horizontal.decrease.circle.fill")
-			} else {
-				Image(systemName: "line.3.horizontal.decrease.circle")
-			}
+			Image(systemName: filteringToBookmarked ? "line.3.horizontal.decrease.circle.fill": "line.3.horizontal.decrease.circle")
 		}
 		.accessibilityLabel(filteringToBookmarked ? InterfaceText._filterIsOn_axLabel : InterfaceText._filterIsOn_axLabel)
 		.accessibilityInputLabels([InterfaceText.toggleFilter])
