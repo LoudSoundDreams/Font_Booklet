@@ -1,8 +1,8 @@
 //  Created on 2023-07-17.
 
-enum Pangrams {
+enum Pangram {
 	static let standard = "The quick brown fox jumps over the lazy dog."
-	// “Jumps”, not “jumped”. Remember the S!
+	// Not “jumped”.
 	
 	static let mysteryBag: [String] = [
 		"Amazingly few discotheques provide jukeboxes.",

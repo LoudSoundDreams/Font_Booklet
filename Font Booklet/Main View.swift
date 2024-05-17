@@ -106,7 +106,7 @@ struct MainView: View {
 		}
 		return Family.all
 	}
-	@AppStorage(DefaultsKey.sampleText.rawValue) private var sample: String = Pangrams.standard
+	@AppStorage(DefaultsKey.sampleText.rawValue) private var sample: String = Pangram.standard
 	@ObservedObject private var bookmarked: Bookmarked = .shared
 	@State private var filteringToBookmarked = false
 	@State private var clearBookmarksConfirmationIsPresented = false
@@ -123,7 +123,7 @@ struct MainView: View {
 	}
 	
 	private var editSampleTextField: some View {
-		TextField(text: $sample, prompt: Text(Pangrams.standard)) {
+		TextField(text: $sample, prompt: Text(Pangram.standard)) {
 			let _ = UITextField.appearance().clearButtonMode = .whileEditing
 		}
 	}
@@ -131,7 +131,7 @@ struct MainView: View {
 		Button(InterfaceText.pangram_exclamationMark) {
 			var newSample = sample
 			while newSample == sample {
-				newSample = Pangrams.mysteryBag.randomElement()!
+				newSample = Pangram.mysteryBag.randomElement()!
 			}
 			sample = newSample
 		}
@@ -139,7 +139,7 @@ struct MainView: View {
 	private var editSampleDoneButton: some View {
 		Button(InterfaceText.done) {
 			if sample.isEmpty {
-				sample = Pangrams.standard
+				sample = Pangram.standard
 			}
 		}.keyboardShortcut(.defaultAction)
 	}
