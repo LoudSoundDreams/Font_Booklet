@@ -10,10 +10,6 @@ import SwiftUI
 struct FamilyDetailView: View {
 	let family: Family
 	let sampleText: String
-	
-	private var styledMembers: [String] {
-		Array(family.members.dropFirst())
-	}
 	var body: some View {
 		List {
 			let firstMember = family.members.first!
@@ -38,5 +34,8 @@ struct FamilyDetailView: View {
 		}
 		.listStyle(.grouped)
 		.navigationTitle(family.surname)
+	}
+	private var styledMembers: [String] {
+		Array(family.members.dropFirst())
 	}
 }

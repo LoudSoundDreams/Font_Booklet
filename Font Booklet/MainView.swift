@@ -68,17 +68,6 @@ private extension View {
 }
 
 struct MainView: View {
-	@ObservedObject private var bookmarked: Bookmarked = .shared
-	@AppStorage(DefaultsKey.sampleText.rawValue) private var sample: String = Pangrams.standard
-	@State private var editingSample = false
-	@State private var filteringToBookmarked = false
-	private var visibleFamilies: [Family] {
-		if filteringToBookmarked {
-			return Family.all.filter { bookmarked.familySurnames.contains($0.surname) }
-		}
-		return Family.all
-	}
-	@State private var clearBookmarksConfirmationIsPresented = false
 	var body: some View {
 		NavigationStack {
 			List(visibleFamilies) { family in
@@ -176,6 +165,17 @@ struct MainView: View {
 			}
 		}
 	}
+	private var visibleFamilies: [Family] {
+		if filteringToBookmarked {
+			return Family.all.filter { bookmarked.familySurnames.contains($0.surname) }
+		}
+		return Family.all
+	}
+	@AppStorage(DefaultsKey.sampleText.rawValue) private var sample: String = Pangrams.standard
+	@ObservedObject private var bookmarked: Bookmarked = .shared
+	@State private var filteringToBookmarked = false
+	@State private var clearBookmarksConfirmationIsPresented = false
+	@State private var editingSample = false
 	
 	private var filterButton: some View {
 		Button {
