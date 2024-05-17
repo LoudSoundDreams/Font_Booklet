@@ -15,6 +15,7 @@
 		073F991C2A66F24700EAC47B /* FontBookletTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073F991B2A66F24700EAC47B /* FontBookletTests.swift */; };
 		076AFA322A6D363800E30563 /* Detail View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076AFA312A6D363800E30563 /* Detail View.swift */; };
 		076AFA342A6D50FF00E30563 /* Shared Views.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076AFA332A6D50FF00E30563 /* Shared Views.swift */; };
+		07B325C02BF708BC00E80BF7 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B325BF2BF708BC00E80BF7 /* Constants.swift */; };
 		07DD66A12BD8DF2200582514 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 07DD66A02BD8DF2200582514 /* PrivacyInfo.xcprivacy */; };
 /* End PBXBuildFile section */
 
@@ -41,6 +42,7 @@
 		073F991B2A66F24700EAC47B /* FontBookletTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontBookletTests.swift; sourceTree = "<group>"; };
 		076AFA312A6D363800E30563 /* Detail View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Detail View.swift"; sourceTree = "<group>"; };
 		076AFA332A6D50FF00E30563 /* Shared Views.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Shared Views.swift"; sourceTree = "<group>"; };
+		07B325BF2BF708BC00E80BF7 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		07DD66A02BD8DF2200582514 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -83,6 +85,7 @@
 		072135E92A0827BD00BE0925 /* Font Booklet */ = {
 			isa = PBXGroup;
 			children = (
+				07B325BF2BF708BC00E80BF7 /* Constants.swift */,
 				072135EA2A0827BD00BE0925 /* FontBookletApp.swift */,
 				072135F92A0828AD00BE0925 /* MainView.swift */,
 				076AFA312A6D363800E30563 /* Detail View.swift */,
@@ -219,6 +222,7 @@
 				076AFA342A6D50FF00E30563 /* Shared Views.swift in Sources */,
 				076AFA322A6D363800E30563 /* Detail View.swift in Sources */,
 				072135EB2A0827BD00BE0925 /* FontBookletApp.swift in Sources */,
+				07B325C02BF708BC00E80BF7 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
