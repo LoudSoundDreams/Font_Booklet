@@ -16,7 +16,7 @@ enum DefaultsPrefix: String, CaseIterable {
 	case prefix_bookmarkedFamily = "BookmarkedFamily:"
 }
 
-enum InterfaceString {
+enum InterfaceText {
 	static let bookmarked = "Bookmarked"
 	static let clearAllBookmarks = "Clear All Bookmarks"
 }

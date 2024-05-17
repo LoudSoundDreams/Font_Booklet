@@ -162,14 +162,14 @@ struct MainView: View {
 					} label: {
 						Image(systemName: "bookmark.slash")
 					}
-					.accessibilityLabel(InterfaceString.clearAllBookmarks)
+					.accessibilityLabel(InterfaceText.clearAllBookmarks)
 					.disabled(bookmarked.familySurnames.isEmpty)
 					.confirmationDialog(
 						"",
 						isPresented: $clearBookmarksConfirmationIsPresented
 					) {
 						Button(
-							InterfaceString.clearAllBookmarks,
+							InterfaceText.clearAllBookmarks,
 							role: .destructive
 						) {
 							bookmarked.familySurnames.removeAll()

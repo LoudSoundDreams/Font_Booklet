@@ -25,7 +25,7 @@ struct SampleView: View {
 					.foregroundColor(.secondary)
 					.accessibilityLabel({ () -> String in
 						if accessibilityValueBookmarked {
-							return "\(InterfaceString.bookmarked), \(label)"
+							return "\(InterfaceText.bookmarked), \(label)"
 						} else {
 							return label
 						}
