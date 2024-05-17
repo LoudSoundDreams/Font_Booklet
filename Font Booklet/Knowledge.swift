@@ -2,13 +2,21 @@
 
 enum Pangrams {
 	static let standard = "The quick brown fox jumps over the lazy dog."
+	// “Jumps”, not “jumped”. Remember the S!
+	
 	static let mysteryBag: [String] = [
-		"Amazingly few discotheques provide jukeboxes.", // Fewest words
-		"Farmer Jack realized the big yellow quilt was expensive.", // Close to one that aired on “Jeopardy!”
+		"Amazingly few discotheques provide jukeboxes.",
+		// Fewest words
+		
+		"Farmer Jack realized the big yellow quilt was expensive.",
+		// Close to one that aired on “Jeopardy!”
+		
 		"Grumpy wizards make toxic brew for the jovial queen.",
 		"Pack my box with five dozen liquor jugs.",
 		"Quick-blowing zephyrs vex daft Jim.",
-		"Watch “Jeopardy!”, Alex Trebek’s fun TV quiz game.", // Includes quotation marks
+		
+		"Watch “Jeopardy!”, Alex Trebek’s fun TV quiz game.",
+		// Includes quotation marks. Keep them curly! https://practicaltypography.com/straight-and-curly-quotes.html
 	]
 }
 
