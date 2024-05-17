@@ -1,9 +1,4 @@
-//
-//  FontBookletTests.swift
-//  Font Booklet Tests
-//
-//  Created by h on 2023-07-18.
-//
+//  Created on 2023-07-18.
 
 import XCTest
 import UIKit

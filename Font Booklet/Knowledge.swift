@@ -1,9 +1,4 @@
-//
-//  Knowledge.swift
-//  Font Booklet
-//
-//  Created by h on 2023-07-17.
-//
+//  Created on 2023-07-17.
 
 enum Pangrams {
 	static let standard = "The quick brown fox jumps over the lazy dog."

@@ -1,9 +1,4 @@
-//
-//  FontBookletApp.swift
-//  Font Booklet
-//
-//  Created by h on 2023-05-07.
-//
+//  Created on 2023-05-07.
 
 import SwiftUI
 

@@ -1,9 +1,4 @@
-//
-//  Shared Views.swift
-//  Font Booklet
-//
-//  Created by h on 2023-07-23.
-//
+//  Created on 2023-07-23.
 
 import SwiftUI
 
