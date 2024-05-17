@@ -7,66 +7,6 @@
 
 import SwiftUI
 
-final class Bookmarked: ObservableObject {
-	static let shared = Bookmarked()
-	private init() {}
-	@Published var familySurnames: Set<String> = {
-		let allFetchedKeys = Bookmarked.defaults.dictionaryRepresentation().keys
-		let keysWithPrefix = allFetchedKeys.filter { key in
-			key.hasPrefix(DefaultsPrefix.prefix_bookmarkedFamily.rawValue)
-		}
-		let result = keysWithPrefix.map { key in
-			String(key.dropFirst(DefaultsPrefix.prefix_bookmarkedFamily.rawValue.count))
-		}
-		return Set(result)
-	}() {
-		didSet {
-			// Delete or create `UserDefaults` entries accordingly
-			let keysToKeep = Set(familySurnames.map { surname in
-				"\(DefaultsPrefix.prefix_bookmarkedFamily.rawValue)\(surname)"
-			})
-			
-			// Delete
-			Self.defaults.dictionaryRepresentation().keys.forEach { existingKey in
-				guard
-					existingKey.hasPrefix(DefaultsPrefix.prefix_bookmarkedFamily.rawValue),
-					!keysToKeep.contains(existingKey)
-				else { return }
-				Self.defaults.removeObject(forKey: existingKey)
-			}
-			
-			// Create
-			keysToKeep.forEach { keyToKeep in
-				Self.defaults.set(true, forKey: keyToKeep) // Value doesn’t actually matter
-			}
-		}
-	}
-	private static let defaults: UserDefaults = .standard
-}
-
-private extension View {
-	func swipeActions_toggleBookmarked(
-		familySurname: String,
-		in bookmarked: Bookmarked
-	) -> some View {
-		swipeActions(edge: .leading) {
-			if bookmarked.familySurnames.contains(familySurname) {
-				Button {
-					bookmarked.familySurnames.remove(familySurname)
-				} label: {
-					Image(systemName: "bookmark.slash.fill").accessibilityLabel(InterfaceText.unbookmark)
-				}.tint(.red)
-			} else {
-				Button {
-					bookmarked.familySurnames.insert(familySurname)
-				} label: {
-					Image(systemName: "bookmark.fill")
-				}.tint(.red)
-			}
-		}
-	}
-}
-
 struct MainView: View {
 	var body: some View {
 		NavigationStack {
@@ -212,4 +152,64 @@ struct MainView: View {
 			}
 		}.keyboardShortcut(.defaultAction)
 	}
+}
+
+private extension View {
+	func swipeActions_toggleBookmarked(
+		familySurname: String,
+		in bookmarked: Bookmarked
+	) -> some View {
+		swipeActions(edge: .leading) {
+			if bookmarked.familySurnames.contains(familySurname) {
+				Button {
+					bookmarked.familySurnames.remove(familySurname)
+				} label: {
+					Image(systemName: "bookmark.slash.fill").accessibilityLabel(InterfaceText.unbookmark)
+				}.tint(.red)
+			} else {
+				Button {
+					bookmarked.familySurnames.insert(familySurname)
+				} label: {
+					Image(systemName: "bookmark.fill")
+				}.tint(.red)
+			}
+		}
+	}
+}
+
+final class Bookmarked: ObservableObject {
+	static let shared = Bookmarked()
+	private init() {}
+	@Published var familySurnames: Set<String> = {
+		let allFetchedKeys = Bookmarked.defaults.dictionaryRepresentation().keys
+		let keysWithPrefix = allFetchedKeys.filter { key in
+			key.hasPrefix(DefaultsPrefix.prefix_bookmarkedFamily.rawValue)
+		}
+		let result = keysWithPrefix.map { key in
+			String(key.dropFirst(DefaultsPrefix.prefix_bookmarkedFamily.rawValue.count))
+		}
+		return Set(result)
+	}() {
+		didSet {
+			// Delete or create `UserDefaults` entries accordingly
+			let keysToKeep = Set(familySurnames.map { surname in
+				"\(DefaultsPrefix.prefix_bookmarkedFamily.rawValue)\(surname)"
+			})
+			
+			// Delete
+			Self.defaults.dictionaryRepresentation().keys.forEach { existingKey in
+				guard
+					existingKey.hasPrefix(DefaultsPrefix.prefix_bookmarkedFamily.rawValue),
+					!keysToKeep.contains(existingKey)
+				else { return }
+				Self.defaults.removeObject(forKey: existingKey)
+			}
+			
+			// Create
+			keysToKeep.forEach { keyToKeep in
+				Self.defaults.set(true, forKey: keyToKeep) // Value doesn’t actually matter
+			}
+		}
+	}
+	private static let defaults: UserDefaults = .standard
 }
