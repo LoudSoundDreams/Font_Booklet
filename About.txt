@@ -27,8 +27,9 @@ This takes a few more steps than for the Simulator.
 3. On your iOS device, [turn on Developer Mode](https://developer.apple.com/documentation/xcode/enabling-developer-mode-on-a-device).
 4. On your Mac, in the menu bar, choose Xcode → Settings → Accounts, then sign in to your Apple account. (Warning: you can only run your app [on 3 devices](https://stackoverflow.com/questions/44230347) unless you pay for the Apple Developer Program.)
 5. In the main Xcode window, in the left sidebar, click the folder icon, then the topmost “Font Booklet” row. To the right, below “Targets”, choose “Font Booklet”, then above, click “Signing & Capabilities”. For “Team”, choose the one associated with your Apple account.
-6. For “Bundle Identifier”, replace “com.loudsounddreams.FontBooklet” with anything else. (This is how Apple devices tell apps apart.)
-7. Atop the Xcode window, click the “play” button.
+6. For “Bundle Identifier”, replace “com.loudsounddreams.FontBooklet” with anything else. (This is how Apple devices tell apps apart.) Below the message “Failed Registering Bundle Identifier”, click “Try Again”.
+7. Atop the Xcode window, click “play”.
+8. Xcode will say “the request to open ‘[your bundle identifier]’ failed.” Follow its instructions for your iOS device, then click “play” again.
 
 For help, see [Apple’s documentation](https://developer.apple.com/documentation/xcode/running-your-app-in-simulator-or-on-a-device/#Connect-real-devices-to-your-Mac).
 
