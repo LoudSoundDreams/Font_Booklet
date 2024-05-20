@@ -36,3 +36,5 @@ For help, see [Apple’s documentation](https://developer.apple.com/documentatio
 ## To submit changes
 
 Fork this repo, make your changes in your fork, then open a pull request against my repo. For help, see [GitHub’s documentation](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/getting-started/about-collaborative-development-models#fork-and-pull-model).
+
+If you change the UI, include screenshots. (You were looking at it anyway, right?)
