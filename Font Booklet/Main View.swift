@@ -45,19 +45,22 @@ struct MainView: View {
 			}
 			.overlay {
 				if visibleFamilies.isEmpty {
-					// Xcode 15: Replace this with `ContentUnavailableView`.
-					VStack {
-						Image(systemName: "bookmark.fill")
-							.foregroundStyle(.secondary)
-							.font(.largeTitle)
-						Text(InterfaceText.noBookmarks)
-							.font(.title)
-						Text(InterfaceText._howToBookmark)
-							.foregroundStyle(.secondary)
+					if #available(iOS 17, *) {
+						ContentUnavailableView(InterfaceText.noBookmarks, systemImage: "bookmark.fill", description: Text(InterfaceText._howToBookmark))
+					} else {
+						VStack {
+							Image(systemName: "bookmark.fill")
+								.foregroundStyle(.secondary)
+								.font(.largeTitle)
+							Text(InterfaceText.noBookmarks)
+								.font(.title)
+							Text(InterfaceText._howToBookmark)
+								.foregroundStyle(.secondary)
+						}
+						.multilineTextAlignment(.center)
+						.padding()
+						.accessibilityElement(children: .combine)
 					}
-					.multilineTextAlignment(.center)
-					.padding()
-					.accessibilityElement(children: .combine)
 				}
 			}
 			.listStyle(.plain)
