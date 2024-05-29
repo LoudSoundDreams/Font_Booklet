@@ -10,7 +10,7 @@ Do anything with it. Pretend you found it on the ground.
 
 Just use [curly quotes](https://practicaltypography.com/straight-and-curly-quotes.html), m’kay?
 
-# How to compile
+# Compiling
 
 1. Install Xcode on your Mac.
 2. Download the code for Font Booklet, then open “Font Booklet.xcodeproj”.
@@ -33,7 +33,7 @@ This takes a few more steps than for the Simulator.
 
 For help, see [Apple’s documentation](https://developer.apple.com/documentation/xcode/running-your-app-in-simulator-or-on-a-device/#Connect-real-devices-to-your-Mac).
 
-## To submit changes
+# Contributing
 
 Fork this repo, make your changes in your fork, then open a pull request against my repo. For help, see [GitHub’s documentation](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/getting-started/about-collaborative-development-models#fork-and-pull-model).
 
