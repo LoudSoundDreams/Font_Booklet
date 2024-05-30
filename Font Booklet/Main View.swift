@@ -93,24 +93,15 @@ struct MainView: View {
 				ToolbarItem(placement: .bottomBar) {
 					Button(
 						InterfaceText.pangram_exclamationMark,
-						systemImage: {
-							switch d6 {
-								case 1: return "die.face.1"
-								case 2: return "die.face.2"
-								case 4: return "die.face.4"
-								case 5: return "die.face.5"
-								case 6: return "die.face.6"
-								default: return "die.face.3" // Most recognizable. If we weren’t doing this little joke, we’d use this icon every time. (Second–most recognizable is 6.)
-							}
-						}()
+						systemImage: Pangram.symbolName(
+							ifKnown: (
+								sample == ""
+								? Pangram.standard // So that if the user clears the text, we don’t momentarily show the default symbol.
+								: sample
+							)
+						) ?? "dice"
 					) {
 						sample = Pangram.random(otherThan: sample)
-						
-						var newD6 = d6
-						while newD6 == d6 {
-							newD6 = .random(in: 1...6)
-						}
-						d6 = newD6
 					}
 				}
 				ToolbarItem(placement: .bottomBar) { Spacer() }
@@ -145,7 +136,6 @@ struct MainView: View {
 	@State private var searchQuery: String = ""
 	@State private var filteringToBookmarked = false
 	@State private var clearBookmarksConfirmationIsPresented = false
-	@State private var d6: Int = .random(in: 1...6)
 	@State private var editingSample = false
 	
 	private var filterButton: some View {
@@ -165,7 +155,7 @@ struct MainView: View {
 	}
 	private var editSampleDoneButton: some View {
 		Button(InterfaceText.done) {
-			if sample.isEmpty {
+			if sample == "" {
 				sample = Pangram.standard
 			}
 		}.keyboardShortcut(.defaultAction)

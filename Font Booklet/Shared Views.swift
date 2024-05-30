@@ -19,7 +19,7 @@ struct SampleView: View {
 						? "\(InterfaceText.bookmarked), \(label)"
 						: label
 					)
-				Text(sampleText.isEmpty ? Pangram.standard : sampleText)
+				Text(sampleText == "" ? Pangram.standard : sampleText)
 					.font(.custom(memberName, size: .eight * 4))
 			}
 			Spacer()

@@ -7,23 +7,29 @@ enum Pangram {
 	static func random(otherThan: String) -> String {
 		var result = otherThan
 		while result == otherThan {
-			result = mysteryBag.randomElement()!
+			result = mysteryBag.keys.randomElement()!
 		}
 		return result
 	}
-	private static let mysteryBag: [String] = [
-		"Amazingly few discotheques provide jukeboxes.",
+	static func symbolName(ifKnown sample: String) -> String? {
+		return mysteryBag[sample]
+	}
+	private static let mysteryBag: [String: String] = [
+		// Alphabetized, except with fallback last.
+		
+		"Amazingly few discotheques provide jukeboxes.": "die.face.1",
 		// Fewest words
 		
-		"Farmer Jack realized the big yellow quilt was expensive.",
+		"Farmer Jack realized the big yellow quilt was expensive.": "die.face.2",
 		// Close to one that aired on “Jeopardy!”
 		
-		"Grumpy wizards make toxic brew for the jovial queen.",
-		"Pack my box with five dozen liquor jugs.",
-		"Quick-blowing zephyrs vex daft Jim.",
+		"Pack my box with five dozen liquor jugs.": "die.face.3",
+		"Quick-blowing zephyrs vex daft Jim.": "die.face.4",
 		
-		"Watch “Jeopardy!”, Alex Trebek’s fun TV quiz game.",
+		"Watch “Jeopardy!”, Alex Trebek’s fun TV quiz game.": "die.face.5",
 		// Includes quotation marks. Keep them curly! https://practicaltypography.com/straight-and-curly-quotes.html
+		
+		Self.standard: "die.face.6"
 	]
 }
 
