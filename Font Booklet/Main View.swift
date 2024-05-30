@@ -91,16 +91,39 @@ struct MainView: View {
 				ToolbarItem(placement: .bottomBar) { filterButton }
 				ToolbarItem(placement: .bottomBar) { Spacer() }
 				ToolbarItem(placement: .bottomBar) {
+					Button(
+						InterfaceText.pangram_exclamationMark,
+						systemImage: {
+							switch d6 {
+								case 1: return "die.face.1"
+								case 2: return "die.face.2"
+								case 4: return "die.face.4"
+								case 5: return "die.face.5"
+								case 6: return "die.face.6"
+								default: return "die.face.3" // Most recognizable. If we weren’t doing this little joke, we’d use this icon every time. (Second–most recognizable is 6.)
+							}
+						}()
+					) {
+						sample = Pangram.random(otherThan: sample)
+						
+						var newD6 = d6
+						while newD6 == d6 {
+							newD6 = .random(in: 1...6)
+						}
+						d6 = newD6
+					}
+				}
+				ToolbarItem(placement: .bottomBar) { Spacer() }
+				ToolbarItem(placement: .bottomBar) {
 					Button {
 						editingSample = true
 					} label: {
 						Image(systemName: "character.cursor.ibeam")
 					}
-					.accessibilityLabel(InterfaceText.editSampleText_axLabel)
+					.accessibilityLabel(InterfaceText.editText)
 					.disabled(visibleFamilies.isEmpty)
-					.alert(InterfaceText.sampleText, isPresented: $editingSample) {
+					.alert(InterfaceText.editText, isPresented: $editingSample) {
 						editSampleTextField
-						editSamplePangramButton
 						editSampleDoneButton
 					}
 				}
@@ -122,6 +145,7 @@ struct MainView: View {
 	@State private var searchQuery: String = ""
 	@State private var filteringToBookmarked = false
 	@State private var clearBookmarksConfirmationIsPresented = false
+	@State private var d6: Int = .random(in: 1...6)
 	@State private var editingSample = false
 	
 	private var filterButton: some View {
@@ -137,15 +161,6 @@ struct MainView: View {
 	private var editSampleTextField: some View {
 		TextField(text: $sample, prompt: Text(Pangram.standard)) {
 			let _ = UITextField.appearance().clearButtonMode = .whileEditing
-		}
-	}
-	private var editSamplePangramButton: some View {
-		Button(InterfaceText.pangram_exclamationMark) {
-			var newSample = sample
-			while newSample == sample {
-				newSample = Pangram.mysteryBag.randomElement()!
-			}
-			sample = newSample
 		}
 	}
 	private var editSampleDoneButton: some View {

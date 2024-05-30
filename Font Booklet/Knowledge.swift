@@ -4,7 +4,14 @@ enum Pangram {
 	static let standard = "The quick brown fox jumps over the lazy dog."
 	// Not “jumped”.
 	
-	static let mysteryBag: [String] = [
+	static func random(otherThan: String) -> String {
+		var result = otherThan
+		while result == otherThan {
+			result = mysteryBag.randomElement()!
+		}
+		return result
+	}
+	private static let mysteryBag: [String] = [
 		"Amazingly few discotheques provide jukeboxes.",
 		// Fewest words
 		
