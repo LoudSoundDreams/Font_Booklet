@@ -67,7 +67,7 @@ struct MainView: View {
 			.navigationTitle(InterfaceText.fonts)
 			.navigationBarTitleDisplayMode(.inline)
 			.toolbar {
-				ToolbarItem(placement: .navigationBarLeading) {
+				ToolbarItem(placement: .topBarLeading) {
 					Button {
 						clearBookmarksConfirmationIsPresented = true
 					} label: {
