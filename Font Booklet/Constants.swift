@@ -31,6 +31,8 @@ enum InterfaceText {
 	static let unbookmark = "Unbookmark"
 	static let clearAllBookmarks = "Clear All Bookmarks"
 	
+	static let noResults = "No Results"
+	
 	static let editSampleText_axLabel = "Edit sample text"
 	static let sampleText = "Sample Text"
 	static let pangram_exclamationMark = "Pangram!"
