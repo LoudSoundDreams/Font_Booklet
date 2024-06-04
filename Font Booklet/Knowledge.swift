@@ -11,8 +11,8 @@ enum Pangram {
 		}
 		return result
 	}
-	static func symbolName(ifKnown sample: String) -> String? {
-		return mysteryBag[sample]
+	static func symbolName(forText: String) -> String {
+		return mysteryBag[forText] ?? "dice"
 	}
 	private static let mysteryBag: [String: String] = [
 		// Alphabetized, except with fallback last.
