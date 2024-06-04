@@ -45,16 +45,19 @@ struct MainView: View {
 			}
 			.overlay {
 				if visibleFamilies.isEmpty {
+					let symbolName: String = filteringToBookmarked ? "bookmark.fill" : "paragraphsign"
+					let heading: String = filteringToBookmarked ? InterfaceText.noBookmarks : InterfaceText.noResults
+					let description: Text? = filteringToBookmarked ? Text(InterfaceText._howToBookmark) : nil
 					if #available(iOS 17, *) {
-						ContentUnavailableView(InterfaceText.noBookmarks, systemImage: "bookmark.fill", description: Text(InterfaceText._howToBookmark))
+						ContentUnavailableView(heading, systemImage: symbolName, description: description)
 					} else {
 						VStack {
-							Image(systemName: "bookmark.fill")
+							Image(systemName: symbolName)
 								.foregroundStyle(.secondary)
 								.font(.largeTitle)
-							Text(InterfaceText.noBookmarks)
+							Text(heading)
 								.font(.title)
-							Text(InterfaceText._howToBookmark)
+							description
 								.foregroundStyle(.secondary)
 						}
 						.multilineTextAlignment(.center)
@@ -66,6 +69,7 @@ struct MainView: View {
 			.listStyle(.plain)
 			.navigationTitle(InterfaceText.fonts)
 			.navigationBarTitleDisplayMode(.inline)
+			.searchable(text: $searchQuery, placement: .navigationBarDrawer(displayMode: .always)) // I’d like to use `searchPresentationToolbarBehavior(.avoidHidingContent)`, but as of iOS 17.5.1, if the search field has contents, presenting the “Clear All Bookmarks” action sheet inexplicably opens the keyboard.
 			.toolbar {
 				ToolbarItem(placement: .topBarLeading) {
 					Button {
@@ -104,13 +108,18 @@ struct MainView: View {
 		}
 	}
 	private var visibleFamilies: [Family] {
+		var result = Family.all
 		if filteringToBookmarked {
-			return Family.all.filter { bookmarked.familySurnames.contains($0.surname) }
+			result = result.filter { bookmarked.familySurnames.contains($0.surname) }
 		}
-		return Family.all
+		if searchQuery != "" {
+			result = result.filter { $0.surname.lowercased().hasPrefix(searchQuery.lowercased()) }
+		}
+		return result
 	}
 	@AppStorage(DefaultsKey.sampleText.rawValue) private var sample: String = Pangram.standard
 	@ObservedObject private var bookmarked: Bookmarked = .shared
+	@State private var searchQuery: String = ""
 	@State private var filteringToBookmarked = false
 	@State private var clearBookmarksConfirmationIsPresented = false
 	@State private var editingSample = false
