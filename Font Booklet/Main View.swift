@@ -126,7 +126,7 @@ struct MainView: View {
 			result = result.filter { bookmarked.familySurnames.contains($0.surname) }
 		}
 		if query != "" {
-			result = result.filter { $0.surname.lowercased().hasPrefix(query.lowercased()) }
+			result = result.filter { $0.surname.lowercased().contains(query.lowercased()) }
 		}
 		return result
 	}
