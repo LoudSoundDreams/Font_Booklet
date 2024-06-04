@@ -33,7 +33,6 @@ enum InterfaceText {
 	
 	static let noResults = "No Results"
 	
-	static let editSampleText_axLabel = "Edit sample text"
-	static let sampleText = "Sample Text"
+	static let editText = "Edit Text"
 	static let pangram_exclamationMark = "Pangram!"
 }

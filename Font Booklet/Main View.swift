@@ -91,16 +91,29 @@ struct MainView: View {
 				ToolbarItem(placement: .bottomBar) { filterButton }
 				ToolbarItem(placement: .bottomBar) { Spacer() }
 				ToolbarItem(placement: .bottomBar) {
+					Button { // `Button(_:systemImage:action:)` is simpler, but as of iOS 17.5.1, it inexplicably over-applies Increase Contrast.
+						sample = Pangram.random(otherThan: sample)
+					} label: {
+						Image(systemName: Pangram.symbolName(forText: (
+							sample == ""
+							? Pangram.standard // So that if the user clears the text, we don’t momentarily show the default symbol.
+							: sample
+						)))
+						.animation(nil, value: sample)
+						.accessibilityLabel(InterfaceText.pangram_exclamationMark)
+					}
+				}
+				ToolbarItem(placement: .bottomBar) { Spacer() }
+				ToolbarItem(placement: .bottomBar) {
 					Button {
 						editingSample = true
 					} label: {
 						Image(systemName: "character.cursor.ibeam")
 					}
-					.accessibilityLabel(InterfaceText.editSampleText_axLabel)
+					.accessibilityLabel(InterfaceText.editText)
 					.disabled(visibleFamilies.isEmpty)
-					.alert(InterfaceText.sampleText, isPresented: $editingSample) {
+					.alert(InterfaceText.editText, isPresented: $editingSample) {
 						editSampleTextField
-						editSamplePangramButton
 						editSampleDoneButton
 					}
 				}
@@ -139,18 +152,9 @@ struct MainView: View {
 			let _ = UITextField.appearance().clearButtonMode = .whileEditing
 		}
 	}
-	private var editSamplePangramButton: some View {
-		Button(InterfaceText.pangram_exclamationMark) {
-			var newSample = sample
-			while newSample == sample {
-				newSample = Pangram.mysteryBag.randomElement()!
-			}
-			sample = newSample
-		}
-	}
 	private var editSampleDoneButton: some View {
 		Button(InterfaceText.done) {
-			if sample.isEmpty {
+			if sample == "" {
 				sample = Pangram.standard
 			}
 		}.keyboardShortcut(.defaultAction)
