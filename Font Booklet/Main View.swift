@@ -91,17 +91,17 @@ struct MainView: View {
 				ToolbarItem(placement: .bottomBar) { filterButton }
 				ToolbarItem(placement: .bottomBar) { Spacer() }
 				ToolbarItem(placement: .bottomBar) {
-					Button(
-						InterfaceText.pangram_exclamationMark,
-						systemImage: Pangram.symbolName(
+					Button { // `Button(_:systemImage:action:)` is simpler, but as of iOS 17.5.1, it inexplicably over-applies Increase Contrast.
+						sample = Pangram.random(otherThan: sample)
+					} label: {
+						Image(systemName: Pangram.symbolName(
 							ifKnown: (
 								sample == ""
 								? Pangram.standard // So that if the user clears the text, we don’t momentarily show the default symbol.
 								: sample
-							)
-						) ?? "dice"
-					) {
-						sample = Pangram.random(otherThan: sample)
+							)) ?? "dice")
+						.animation(nil, value: sample)
+						.accessibilityLabel(InterfaceText.pangram_exclamationMark)
 					}
 				}
 				ToolbarItem(placement: .bottomBar) { Spacer() }
