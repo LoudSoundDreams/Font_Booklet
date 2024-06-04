@@ -86,10 +86,9 @@ struct MainView: View {
 						Button(InterfaceText.cancel, role: .cancel) {}
 					}
 				}
+				ToolbarItem(placement: .topBarTrailing) { filterButton }
 			}
 			.toolbar {
-				ToolbarItem(placement: .bottomBar) { filterButton }
-				ToolbarItem(placement: .bottomBar) { Spacer() }
 				ToolbarItem(placement: .bottomBar) {
 					Button { // `Button(_:systemImage:action:)` is simpler, but as of iOS 17.5.1, it inexplicably over-applies Increase Contrast.
 						sample = Pangram.random(otherThan: sample)
