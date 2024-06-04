@@ -69,7 +69,14 @@ struct MainView: View {
 			.listStyle(.plain)
 			.navigationTitle(InterfaceText.fonts)
 			.navigationBarTitleDisplayMode(.inline)
-			.searchable(text: $query, placement: .navigationBarDrawer(displayMode: .always)) // I’d like to use `searchPresentationToolbarBehavior(.avoidHidingContent)`, but as of iOS 17.5.1, if the search field has contents, presenting the “Clear All Bookmarks” action sheet inexplicably opens the keyboard.
+			.searchable(text: $query, placement: .navigationBarDrawer(displayMode: .always))
+			.modifiedBy {
+				if #available(iOS 17.1, *) {
+					$0.searchPresentationToolbarBehavior(.avoidHidingContent) // As of iOS 17.5.1, if the search field has contents, presenting the “Clear All Bookmarks” action sheet inexplicably opens the keyboard.
+				} else {
+					$0
+				}
+			}
 			.toolbar {
 				ToolbarItem(placement: .topBarLeading) {
 					Button {
@@ -180,6 +187,10 @@ private extension View {
 				}.tint(.red)
 			}
 		}
+	}
+	
+	func modifiedBy(@ViewBuilder _ modifier: (Self) -> some View) -> some View {
+		modifier(self)
 	}
 }
 
