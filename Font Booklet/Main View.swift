@@ -45,9 +45,9 @@ struct MainView: View {
 			}
 			.overlay {
 				if visibleFamilies.isEmpty {
-					let symbolName: String = filteringToBookmarked ? "bookmark.fill" : "paragraphsign"
-					let heading: String = filteringToBookmarked ? InterfaceText.noBookmarks : InterfaceText.noResults
-					let description: Text? = filteringToBookmarked ? Text(InterfaceText._howToBookmark) : nil
+					let symbolName: String = filtering ? "bookmark.fill" : "paragraphsign"
+					let heading: String = filtering ? InterfaceText.noBookmarks : InterfaceText.noResults
+					let description: Text? = filtering ? Text(InterfaceText._howToBookmark) : nil
 					if #available(iOS 17, *) {
 						ContentUnavailableView(heading, systemImage: symbolName, description: description)
 					} else {
@@ -69,17 +69,17 @@ struct MainView: View {
 			.listStyle(.plain)
 			.navigationTitle(InterfaceText.fonts)
 			.navigationBarTitleDisplayMode(.inline)
-			.searchable(text: $searchQuery, placement: .navigationBarDrawer(displayMode: .always)) // I’d like to use `searchPresentationToolbarBehavior(.avoidHidingContent)`, but as of iOS 17.5.1, if the search field has contents, presenting the “Clear All Bookmarks” action sheet inexplicably opens the keyboard.
+			.searchable(text: $query, placement: .navigationBarDrawer(displayMode: .always)) // I’d like to use `searchPresentationToolbarBehavior(.avoidHidingContent)`, but as of iOS 17.5.1, if the search field has contents, presenting the “Clear All Bookmarks” action sheet inexplicably opens the keyboard.
 			.toolbar {
 				ToolbarItem(placement: .topBarLeading) {
 					Button {
-						clearBookmarksConfirmationIsPresented = true
+						confirmingClear = true
 					} label: {
 						Image(systemName: "bookmark.slash")
 					}
 					.accessibilityLabel(InterfaceText.clearAllBookmarks)
 					.disabled(bookmarked.familySurnames.isEmpty)
-					.confirmationDialog("", isPresented: $clearBookmarksConfirmationIsPresented) {
+					.confirmationDialog("", isPresented: $confirmingClear) {
 						Button(InterfaceText.clearAllBookmarks, role: .destructive) {
 							bookmarked.familySurnames.removeAll()
 						}
@@ -122,28 +122,28 @@ struct MainView: View {
 	}
 	private var visibleFamilies: [Family] {
 		var result = Family.all
-		if filteringToBookmarked {
+		if filtering {
 			result = result.filter { bookmarked.familySurnames.contains($0.surname) }
 		}
-		if searchQuery != "" {
-			result = result.filter { $0.surname.lowercased().hasPrefix(searchQuery.lowercased()) }
+		if query != "" {
+			result = result.filter { $0.surname.lowercased().hasPrefix(query.lowercased()) }
 		}
 		return result
 	}
 	@AppStorage(DefaultsKey.sampleText.rawValue) private var sample: String = Pangram.standard
 	@ObservedObject private var bookmarked: Bookmarked = .shared
-	@State private var searchQuery: String = ""
-	@State private var filteringToBookmarked = false
-	@State private var clearBookmarksConfirmationIsPresented = false
+	@State private var query: String = ""
+	@State private var filtering = false
+	@State private var confirmingClear = false
 	@State private var editingSample = false
 	
 	private var filterButton: some View {
 		Button {
-			filteringToBookmarked.toggle()
+			filtering.toggle()
 		} label: {
-			Image(systemName: filteringToBookmarked ? "line.3.horizontal.decrease.circle.fill": "line.3.horizontal.decrease.circle")
+			Image(systemName: filtering ? "line.3.horizontal.decrease.circle.fill": "line.3.horizontal.decrease.circle")
 		}
-		.accessibilityLabel(filteringToBookmarked ? InterfaceText._filterIsOn_axLabel : InterfaceText._filterIsOn_axLabel)
+		.accessibilityLabel(filtering ? InterfaceText._filterIsOn_axLabel : InterfaceText._filterIsOn_axLabel)
 		.accessibilityInputLabels([InterfaceText.toggleFilter])
 	}
 	
