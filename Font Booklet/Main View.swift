@@ -69,7 +69,8 @@ struct MainView: View {
 			.listStyle(.plain)
 			.navigationTitle(InterfaceText.fonts)
 			.navigationBarTitleDisplayMode(.inline)
-			.searchable(text: $query, placement: .navigationBarDrawer(displayMode: .always)) // I’d like to use `searchPresentationToolbarBehavior(.avoidHidingContent)`, but as of iOS 17.5.1, if the search field has contents, presenting the “Clear All Bookmarks” action sheet inexplicably opens the keyboard.
+			.searchable(text: $query, placement: .navigationBarDrawer(displayMode: .always))
+			.searchPresentationToolbarBehavior(.avoidHidingContent) // As of iOS 17.5.1, if the search field has contents, presenting the “Clear All Bookmarks” action sheet inexplicably opens the keyboard.
 			.toolbar {
 				ToolbarItem(placement: .topBarLeading) {
 					Button {
@@ -112,7 +113,7 @@ struct MainView: View {
 					.accessibilityLabel(InterfaceText.editText)
 					.disabled(visibleFamilies.isEmpty)
 					.alert(InterfaceText.editText, isPresented: $editingSample) {
-						editSampleTextField
+						editSampleTextField // As of iOS 17.5.1, if the search field has contents, it inexplicably takes keyboard focus.
 						editSampleDoneButton
 					}
 				}
