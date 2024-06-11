@@ -10,9 +10,7 @@ struct MainView: View {
 				// It’d be nice to deduplicate this code.
 				if family.members.count <= 1 {
 					SampleView(
-						label: family.surname,
-						memberName: family.members.first!,
-						sampleText: sample,
+						label: family.surname, memberName: family.members.first!, sampleText: sample,
 						leavesTrailingSpaceForBookmark: true,
 						accessibilityValueBookmarked: bookmarked.familySurnames.contains(family.surname))
 					.swipeActions_toggleBookmarked(familySurname: family.surname, in: bookmarked)
@@ -25,9 +23,7 @@ struct MainView: View {
 				} else {
 					NavigationLink(value: family) {
 						SampleView(
-							label: family.surname,
-							memberName: family.members.first!,
-							sampleText: sample,
+							label: family.surname, memberName: family.members.first!, sampleText: sample,
 							leavesTrailingSpaceForBookmark: false,
 							accessibilityValueBookmarked: bookmarked.familySurnames.contains(family.surname))
 						.swipeActions_toggleBookmarked(familySurname: family.surname, in: bookmarked)
