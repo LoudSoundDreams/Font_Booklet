@@ -72,7 +72,7 @@ import SwiftUI
 				ToolbarItem(placement: .topBarTrailing) { filterButton }
 			}
 			.toolbar {
-				ToolbarItem(placement: .bottomBar) {
+				ToolbarItemGroup(placement: .bottomBar) {
 					Button { // `Button(_:systemImage:action:)` is simpler, but as of iOS 17.5.1, it inexplicably over-applies Increase Contrast.
 						sample = Pangram.random(otherThan: sample)
 					} label: {
@@ -84,9 +84,7 @@ import SwiftUI
 						.animation(nil, value: sample)
 						.accessibilityLabel(InterfaceText.pangram_exclamationMark)
 					}
-				}
-				ToolbarItem(placement: .bottomBar) { Spacer() }
-				ToolbarItem(placement: .bottomBar) {
+					Spacer()
 					Button {
 						editingSample = true
 					} label: {
