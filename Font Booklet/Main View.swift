@@ -41,24 +41,10 @@ import SwiftUI
 			}
 			.overlay {
 				if visibleFamilies.isEmpty {
-					let symbolName: String = filtering ? "bookmark.fill" : "paragraphsign"
-					let heading: String = filtering ? InterfaceText.noBookmarks : InterfaceText.noResults
-					let description: Text? = filtering ? Text(InterfaceText._howToBookmark) : nil
-					if #available(iOS 17, *) {
-						ContentUnavailableView(heading, systemImage: symbolName, description: description)
+					if filtering {
+						ContentUnavailableView(InterfaceText.noBookmarks, systemImage: "bookmark.fill", description: Text(InterfaceText._howToBookmark))
 					} else {
-						VStack {
-							Image(systemName: symbolName)
-								.foregroundStyle(.secondary)
-								.font(.largeTitle)
-							Text(heading)
-								.font(.title)
-							description
-								.foregroundStyle(.secondary)
-						}
-						.multilineTextAlignment(.center)
-						.padding()
-						.accessibilityElement(children: .combine)
+						ContentUnavailableView(InterfaceText.noResults, systemImage: "paragraphsign")
 					}
 				}
 			}
