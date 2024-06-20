@@ -176,27 +176,25 @@ private extension View {
 			String(key.dropFirst(DefaultsPrefix.prefix_bookmarkedFamily.rawValue.count))
 		}
 		return Set(result)
-	}() {
-		didSet {
-			// Delete or create `UserDefaults` entries accordingly
-			let keysToKeep = Set(familySurnames.map { surname in
-				"\(DefaultsPrefix.prefix_bookmarkedFamily.rawValue)\(surname)"
-			})
-			
-			// Delete
-			Self.defaults.dictionaryRepresentation().keys.forEach { existingKey in
-				guard
-					existingKey.hasPrefix(DefaultsPrefix.prefix_bookmarkedFamily.rawValue),
-					!keysToKeep.contains(existingKey)
-				else { return }
-				Self.defaults.removeObject(forKey: existingKey)
-			}
-			
-			// Create
-			keysToKeep.forEach { keyToKeep in
-				Self.defaults.set(true, forKey: keyToKeep) // Value doesn’t actually matter
-			}
+	}() { didSet {
+		// Delete or create `UserDefaults` entries accordingly
+		let keysToKeep = Set(familySurnames.map { surname in
+			"\(DefaultsPrefix.prefix_bookmarkedFamily.rawValue)\(surname)"
+		})
+		
+		// Delete
+		Self.defaults.dictionaryRepresentation().keys.forEach { existingKey in
+			guard
+				existingKey.hasPrefix(DefaultsPrefix.prefix_bookmarkedFamily.rawValue),
+				!keysToKeep.contains(existingKey)
+			else { return }
+			Self.defaults.removeObject(forKey: existingKey)
 		}
-	}
+		
+		// Create
+		keysToKeep.forEach { keyToKeep in
+			Self.defaults.set(true, forKey: keyToKeep) // Value doesn’t actually matter
+		}
+	}}
 	private static let defaults: UserDefaults = .standard
 }

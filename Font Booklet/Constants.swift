@@ -2,10 +2,12 @@
 
 import Foundation
 
+// Reference hard-coded numbers here to keep them consistent throughout the app.
 extension CGFloat {
 	static let eight: Self = 8
 }
 
+// Keep keys here to ensure they’re unique.
 enum DefaultsKey: String, CaseIterable {
 	case sampleText = "SampleText"
 }
@@ -13,6 +15,7 @@ enum DefaultsPrefix: String, CaseIterable {
 	case prefix_bookmarkedFamily = "BookmarkedFamily:"
 }
 
+// Reference user-facing text here to keep it consistent throughout the app.
 enum InterfaceText {
 	// Include “_” if the string doesn’t match the constant’s name.
 	
