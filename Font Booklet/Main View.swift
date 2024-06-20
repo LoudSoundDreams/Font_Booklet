@@ -2,7 +2,7 @@
 
 import SwiftUI
 
-struct MainView: View {
+@MainActor struct MainView: View {
 	var body: some View {
 		NavigationStack {
 			List(visibleFamilies) { family in
@@ -127,7 +127,7 @@ struct MainView: View {
 		return result
 	}
 	@AppStorage(DefaultsKey.sampleText.rawValue) private var sample: String = Pangram.standard
-	@ObservedObject private var bookmarked: Bookmarked = .shared
+	private let bookmarked: Bookmarked = .shared
 	@State private var query: String = ""
 	@State private var filtering = false
 	@State private var confirmingClear = false
@@ -180,10 +180,10 @@ private extension View {
 	}
 }
 
-@MainActor final class Bookmarked: ObservableObject {
+@MainActor @Observable final class Bookmarked {
 	static let shared = Bookmarked()
 	private init() {}
-	@Published var familySurnames: Set<String> = {
+	var familySurnames: Set<String> = {
 		let allFetchedKeys = Bookmarked.defaults.dictionaryRepresentation().keys
 		let keysWithPrefix = allFetchedKeys.filter { key in
 			key.hasPrefix(DefaultsPrefix.prefix_bookmarkedFamily.rawValue)
