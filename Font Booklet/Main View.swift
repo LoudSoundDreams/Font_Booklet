@@ -158,7 +158,7 @@ struct MainView: View {
 }
 
 private extension View {
-	func swipeActions_toggleBookmarked(
+	@MainActor func swipeActions_toggleBookmarked(
 		familySurname: String,
 		in bookmarked: Bookmarked
 	) -> some View {
@@ -180,7 +180,7 @@ private extension View {
 	}
 }
 
-final class Bookmarked: ObservableObject {
+@MainActor final class Bookmarked: ObservableObject {
 	static let shared = Bookmarked()
 	private init() {}
 	@Published var familySurnames: Set<String> = {
