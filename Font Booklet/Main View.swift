@@ -164,28 +164,28 @@ private extension View {
 	}
 }
 
-@MainActor @Observable final class Bookmarked {
+@MainActor @Observable private final class Bookmarked {
 	static let shared = Bookmarked()
 	private init() {}
 	var familySurnames: Set<String> = {
 		let allFetchedKeys = Bookmarked.defaults.dictionaryRepresentation().keys
 		let keysWithPrefix = allFetchedKeys.filter { key in
-			key.hasPrefix(DefaultsPrefix.prefix_bookmarkedFamily.rawValue)
+			key.hasPrefix(Bookmarked.prefix)
 		}
 		let result = keysWithPrefix.map { key in
-			String(key.dropFirst(DefaultsPrefix.prefix_bookmarkedFamily.rawValue.count))
+			String(key.dropFirst(Bookmarked.prefix.count))
 		}
 		return Set(result)
 	}() { didSet {
 		// Delete or create `UserDefaults` entries accordingly
 		let keysToKeep = Set(familySurnames.map { surname in
-			"\(DefaultsPrefix.prefix_bookmarkedFamily.rawValue)\(surname)"
+			"\(Self.prefix)\(surname)"
 		})
 		
 		// Delete
 		Self.defaults.dictionaryRepresentation().keys.forEach { existingKey in
 			guard
-				existingKey.hasPrefix(DefaultsPrefix.prefix_bookmarkedFamily.rawValue),
+				existingKey.hasPrefix(Self.prefix),
 				!keysToKeep.contains(existingKey)
 			else { return }
 			Self.defaults.removeObject(forKey: existingKey)
@@ -196,5 +196,6 @@ private extension View {
 			Self.defaults.set(true, forKey: keyToKeep) // Value doesn’t actually matter
 		}
 	}}
-	private static let defaults: UserDefaults = .standard
+	private static var defaults: UserDefaults { return .standard }
+	private static var prefix: String { return DefaultsPrefix.prefix_bookmarkedFamily.rawValue }
 }
