@@ -12,24 +12,24 @@ enum Pangram {
 		return result
 	}
 	static func symbolName(forText: String) -> String {
-		return mysteryBag[forText] ?? "dice"
+		return mysteryBag[forText] ?? "dice.fill"
 	}
 	private static let mysteryBag: [String: String] = [
 		// Alphabetized, except with fallback last.
 		
-		"Amazingly few discotheques provide jukeboxes.": "die.face.1",
+		"Amazingly few discotheques provide jukeboxes.": "die.face.1.fill",
 		// Fewest words
 		
-		"Farmer Jack realized the big yellow quilt was expensive.": "die.face.2",
+		"Farmer Jack realized the big yellow quilt was expensive.": "die.face.2.fill",
 		// Close to one that aired on “Jeopardy!”
 		
-		"Pack my box with five dozen liquor jugs.": "die.face.3",
-		"Quick-blowing zephyrs vex daft Jim.": "die.face.4",
+		"Pack my box with five dozen liquor jugs.": "die.face.3.fill",
+		"Quick-blowing zephyrs vex daft Jim.": "die.face.4.fill",
 		
-		"Watch “Jeopardy!”, Alex Trebek’s fun TV quiz game.": "die.face.5",
+		"Watch “Jeopardy!”, Alex Trebek’s fun TV quiz game.": "die.face.5.fill",
 		// Includes quotation marks. Keep them curly! https://practicaltypography.com/straight-and-curly-quotes.html
 		
-		Self.standard: "die.face.6"
+		Self.standard: "die.face.6.fill"
 	]
 }
 

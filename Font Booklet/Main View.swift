@@ -59,7 +59,7 @@ import SwiftUI
 					Button {
 						confirmingClear = true
 					} label: {
-						Image(systemName: "bookmark.slash")
+						Image(systemName: "bookmark.slash.fill").symbolRenderingMode(.hierarchical)
 					}
 					.accessibilityLabel(InterfaceText.clearAllBookmarks)
 					.disabled(bookmarked.familySurnames.isEmpty)
@@ -83,6 +83,7 @@ import SwiftUI
 						? Pangram.standard // So that if the user clears the text, we don’t momentarily show the default symbol.
 						: sample
 					)))
+					.symbolRenderingMode(.hierarchical)
 					.accessibilityLabel(InterfaceText.pangram_exclamationMark)
 				}
 				.disabled(visibleFamilies.isEmpty)
@@ -90,7 +91,7 @@ import SwiftUI
 				Button {
 					editingSample = true
 				} label: {
-					Image(systemName: "character.cursor.ibeam")
+					Image(systemName: "character.cursor.ibeam").symbolRenderingMode(.hierarchical)
 				}
 				.accessibilityLabel(InterfaceText.editText)
 				.disabled(visibleFamilies.isEmpty)
@@ -121,7 +122,7 @@ import SwiftUI
 		Button {
 			filtering.toggle()
 		} label: {
-			Image(systemName: filtering ? "line.3.horizontal.decrease.circle.fill": "line.3.horizontal.decrease.circle")
+			Image(systemName: "line.3.horizontal.decrease.circle.fill").symbolRenderingMode(filtering ? .monochrome : .hierarchical)
 		}
 		.accessibilityLabel(filtering ? InterfaceText._filterIsOn_axLabel : InterfaceText._filterIsOn_axLabel)
 		.accessibilityInputLabels([InterfaceText.toggleFilter])
@@ -151,7 +152,9 @@ private extension View {
 				Button {
 					bookmarked.familySurnames.remove(familySurname)
 				} label: {
-					Image(systemName: "bookmark.slash.fill").accessibilityLabel(InterfaceText.unbookmark)
+					Image(systemName: "bookmark.slash.fill")
+					// It would be consistent to use `symbolRenderingMode(.hierarchical)` here, but as of iOS 17.6 developer beta 1, that does nothing.
+						.accessibilityLabel(InterfaceText.unbookmark)
 				}.tint(.red)
 			} else {
 				Button {
