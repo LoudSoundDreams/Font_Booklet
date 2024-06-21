@@ -3,6 +3,7 @@
 import SwiftUI
 
 @MainActor struct MainView: View {
+	@Binding var sample: String
 	var body: some View {
 		NavigationStack {
 			List(visibleFamilies) { family in
@@ -71,6 +72,7 @@ import SwiftUI
 				}
 				ToolbarItem(placement: .topBarTrailing) { filterButton }
 			}
+		}
 			.toolbar {
 				ToolbarItemGroup(placement: .bottomBar) {
 					Button { // `Button(_:systemImage:action:)` is simpler, but as of iOS 17.5.1, it inexplicably over-applies Increase Contrast.
@@ -81,9 +83,9 @@ import SwiftUI
 							? Pangram.standard // So that if the user clears the text, we don’t momentarily show the default symbol.
 							: sample
 						)))
-						.animation(nil, value: sample)
 						.accessibilityLabel(InterfaceText.pangram_exclamationMark)
 					}
+					.disabled(visibleFamilies.isEmpty)
 					Spacer()
 					Button {
 						editingSample = true
@@ -96,7 +98,6 @@ import SwiftUI
 						editSampleTextField // As of iOS 17.5.1, if the search field has contents, it inexplicably takes keyboard focus.
 						editSampleDoneButton
 					}
-				}
 			}
 		}
 	}
@@ -110,7 +111,6 @@ import SwiftUI
 		}
 		return result
 	}
-	@AppStorage(DefaultsKey.sampleText.rawValue) private var sample: String = Pangram.standard
 	private let bookmarked: Bookmarked = .shared
 	@State private var query: String = ""
 	@State private var filtering = false

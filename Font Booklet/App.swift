@@ -21,7 +21,8 @@ struct FontBooklet: App {
 	
 	var body: some Scene {
 		WindowGroup {
-			MainView()
+			MainView(sample: $sample)
 		}
 	}
+	@AppStorage(DefaultsKey.sampleText.rawValue) private var sample: String = Pangram.standard
 }
