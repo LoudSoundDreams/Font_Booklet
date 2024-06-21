@@ -73,31 +73,31 @@ import SwiftUI
 				ToolbarItem(placement: .topBarTrailing) { filterButton }
 			}
 		}
-			.toolbar {
-				ToolbarItemGroup(placement: .bottomBar) {
-					Button { // `Button(_:systemImage:action:)` is simpler, but as of iOS 17.5.1, it inexplicably over-applies Increase Contrast.
-						sample = Pangram.random(otherThan: sample)
-					} label: {
-						Image(systemName: Pangram.symbolName(forText: (
-							sample == ""
-							? Pangram.standard // So that if the user clears the text, we don’t momentarily show the default symbol.
-							: sample
-						)))
-						.accessibilityLabel(InterfaceText.pangram_exclamationMark)
-					}
-					.disabled(visibleFamilies.isEmpty)
-					Spacer()
-					Button {
-						editingSample = true
-					} label: {
-						Image(systemName: "character.cursor.ibeam")
-					}
-					.accessibilityLabel(InterfaceText.editText)
-					.disabled(visibleFamilies.isEmpty)
-					.alert(InterfaceText.editText, isPresented: $editingSample) {
-						editSampleTextField // As of iOS 17.5.1, if the search field has contents, it inexplicably takes keyboard focus.
-						editSampleDoneButton
-					}
+		.toolbar {
+			ToolbarItemGroup(placement: .bottomBar) {
+				Button { // `Button(_:systemImage:action:)` is simpler, but as of iOS 17.5.1, it inexplicably over-applies Increase Contrast.
+					sample = Pangram.random(otherThan: sample)
+				} label: {
+					Image(systemName: Pangram.symbolName(forText: (
+						sample == ""
+						? Pangram.standard // So that if the user clears the text, we don’t momentarily show the default symbol.
+						: sample
+					)))
+					.accessibilityLabel(InterfaceText.pangram_exclamationMark)
+				}
+				.disabled(visibleFamilies.isEmpty)
+				Spacer()
+				Button {
+					editingSample = true
+				} label: {
+					Image(systemName: "character.cursor.ibeam")
+				}
+				.accessibilityLabel(InterfaceText.editText)
+				.disabled(visibleFamilies.isEmpty)
+				.alert(InterfaceText.editText, isPresented: $editingSample) {
+					editSampleTextField // As of iOS 17.5.1, if the search field has contents, it inexplicably takes keyboard focus.
+					editSampleDoneButton
+				}
 			}
 		}
 	}
