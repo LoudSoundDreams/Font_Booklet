@@ -2,8 +2,7 @@
 
 import SwiftUI
 
-@main
-struct FontBooklet: App {
+@main struct FontBooklet: App {
 	init() {
 		// Clean up after ourselves; leave no unused data in persistent storage.
 		let defaults = UserDefaults.standard
@@ -12,7 +11,7 @@ struct FontBooklet: App {
 		defaults.dictionaryRepresentation().forEach { (existingKey, _) in
 			if keysToKeep.contains(existingKey) { return }
 			for prefixToKeep in prefixesToKeep {
-				if existingKey.hasPrefix(prefixToKeep) { return }
+				if existingKey.hasPrefix(prefixToKeep) { return } // TO DO: Future OS versions might remove fonts the user bookmarked. Remove those bookmarks.
 			}
 			
 			defaults.removeObject(forKey: existingKey)
