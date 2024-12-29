@@ -1,14 +1,6 @@
 Font Booklet is a font comparer.
 
-It’s on the [App Store](https://apps.apple.com/us/app/font-booklet/id6451394358).
-
-# Permissions
-
-I dedicate this software to the public domain.
-
-Do anything with it. Pretend you found it on the ground.
-
-Just use [curly quotes](https://practicaltypography.com/straight-and-curly-quotes.html), m’kay?
+[Get from the App Store.](https://apps.apple.com/us/app/font-booklet/id6451394358)
 
 # Compiling
 
@@ -37,3 +29,9 @@ For help, see [Apple’s documentation](https://developer.apple.com/documentatio
 Fork this repo, make your changes in your fork, then open a pull request against my repo. For help, see [GitHub’s documentation](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/getting-started/about-collaborative-development-models#fork-and-pull-model).
 
 If you change the UI, include screenshots. (You were looking at it anyway, right?)
+
+# Permissions
+
+I dedicate this source code to the public domain. Do anything with it. Pretend you found it on the ground.
+
+Just use [curly quotes](https://practicaltypography.com/straight-and-curly-quotes.html), m’kay?
