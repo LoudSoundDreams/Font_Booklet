@@ -10,7 +10,7 @@ import SwiftUI
 				// Make the row tappable and show a chevron on it only if the family has multiple members.
 				// It’d be nice to deduplicate this code.
 				if family.members.count <= 1 {
-					SampleView(
+					SampleRow(
 						label: family.surname, memberName: family.members.first!, sampleText: sample,
 						leavesTrailingSpaceForBookmark: true,
 						accessibilityValueBookmarked: bookmarked.familySurnames.contains(family.surname))
@@ -23,7 +23,7 @@ import SwiftUI
 					.accessibilityElement(children: .combine)
 				} else {
 					NavigationLink(value: family) {
-						SampleView(
+						SampleRow(
 							label: family.surname, memberName: family.members.first!, sampleText: sample,
 							leavesTrailingSpaceForBookmark: false,
 							accessibilityValueBookmarked: bookmarked.familySurnames.contains(family.surname))
@@ -38,7 +38,7 @@ import SwiftUI
 				}
 			}
 			.navigationDestination(for: Family.self) { family in
-				FamilyDetailView(family: family, sampleText: sample)
+				FamilyView(family: family, sampleText: sample)
 			}
 			.overlay {
 				if visibleFamilies.isEmpty {

@@ -2,7 +2,7 @@
 
 import SwiftUI
 
-struct SampleView: View {
+struct SampleRow: View {
 	let label: String
 	let memberName: String
 	let sampleText: String
