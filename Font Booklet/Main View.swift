@@ -79,15 +79,9 @@ import SwiftUI
 				Button { // `Button(_:systemImage:action:)` is simpler, but as of iOS 17.5.1, it inexplicably over-applies Increase Contrast.
 					sample = Pangram.random(otherThan: sample)
 				} label: {
-					Image(systemName: Pangram.symbolName(
-						forPangram: (
-							sample == ""
-							? Pangram.standard // So that if the user clears the text, we don’t momentarily show the default symbol.
-							: sample
-						))
-					)
-					.symbolRenderingMode(.hierarchical)
-					.accessibilityLabel(InterfaceText.pangram_exclamationMark)
+					Image(systemName: "dice")
+						.symbolRenderingMode(.hierarchical)
+						.accessibilityLabel(InterfaceText.pangram_exclamationMark)
 				}
 				.disabled(visibleFamilies.isEmpty)
 				Spacer()
