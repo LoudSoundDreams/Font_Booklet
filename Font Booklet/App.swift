@@ -11,9 +11,11 @@ import SwiftUI
 		defaults.dictionaryRepresentation().forEach { (existingKey, _) in
 			if keysToKeep.contains(existingKey) { return }
 			for prefixToKeep in prefixesToKeep {
-				if existingKey.hasPrefix(prefixToKeep) { return } // TO DO: Future OS versions might remove fonts the user bookmarked. Remove those bookmarks.
+				if existingKey.hasPrefix(prefixToKeep) {
+					// TO DO: Future OS versions might remove fonts the user bookmarked. Remove those bookmarks.
+					return
+				}
 			}
-			
 			defaults.removeObject(forKey: existingKey)
 		}
 	}

@@ -59,7 +59,8 @@ import SwiftUI
 					Button {
 						confirmingClear = true
 					} label: {
-						Image(systemName: "bookmark.slash.fill").symbolRenderingMode(.hierarchical)
+						Image(systemName: "bookmark.slash.fill")
+							.symbolRenderingMode(.hierarchical)
 					}
 					.accessibilityLabel(InterfaceText.clearAllBookmarks)
 					.disabled(bookmarked.familySurnames.isEmpty)
@@ -78,11 +79,13 @@ import SwiftUI
 				Button { // `Button(_:systemImage:action:)` is simpler, but as of iOS 17.5.1, it inexplicably over-applies Increase Contrast.
 					sample = Pangram.random(otherThan: sample)
 				} label: {
-					Image(systemName: Pangram.symbolName(forText: (
-						sample == ""
-						? Pangram.standard // So that if the user clears the text, we don’t momentarily show the default symbol.
-						: sample
-					)))
+					Image(systemName: Pangram.symbolName(
+						forPangram: (
+							sample == ""
+							? Pangram.standard // So that if the user clears the text, we don’t momentarily show the default symbol.
+							: sample
+						))
+					)
 					.symbolRenderingMode(.hierarchical)
 					.accessibilityLabel(InterfaceText.pangram_exclamationMark)
 				}
@@ -91,7 +94,8 @@ import SwiftUI
 				Button {
 					editingSample = true
 				} label: {
-					Image(systemName: "character.cursor.ibeam").symbolRenderingMode(.hierarchical)
+					Image(systemName: "character.cursor.ibeam")
+						.symbolRenderingMode(.hierarchical)
 				}
 				.accessibilityLabel(InterfaceText.editText)
 				.disabled(visibleFamilies.isEmpty)
@@ -122,7 +126,8 @@ import SwiftUI
 		Button {
 			filtering.toggle()
 		} label: {
-			Image(systemName: "line.3.horizontal.decrease.circle.fill").symbolRenderingMode(filtering ? .monochrome : .hierarchical)
+			Image(systemName: "line.3.horizontal.decrease.circle.fill")
+				.symbolRenderingMode(filtering ? .monochrome : .hierarchical)
 		}
 		.accessibilityLabel(filtering ? InterfaceText._filterIsOn_axLabel : InterfaceText._filterIsOn_axLabel)
 		.accessibilityInputLabels([InterfaceText.toggleFilter])

@@ -1,39 +1,38 @@
 //  Created on 2023-07-17.
 
+import UIKit
+
 enum Pangram {
-	static let standard = "The quick brown fox jumps over the lazy dog."
-	// Not “jumped”.
-	
+	static let standard = "The quick brown fox jumps over the lazy dog." // Not “jumped”.
 	static func random(otherThan: String) -> String {
 		var result = otherThan
 		while result == otherThan {
-			result = mysteryBag.keys.randomElement()!
+			result = bag.keys.randomElement()!
 		}
 		return result
 	}
-	static func symbolName(forText: String) -> String {
-		return mysteryBag[forText] ?? "dice"
+	static func symbolName(forPangram: String) -> String {
+		return bag[forPangram] ?? "dice"
 	}
-	private static let mysteryBag: [String: String] = [
+	
+	private static let bag: [String: String] = [
 		// Alphabetized, except with fallback last.
 		
-		"Amazingly few discotheques provide jukeboxes.": "die.face.1.fill",
 		// Fewest words
+		"Amazingly few discotheques provide jukeboxes.": "die.face.1.fill",
 		
-		"Farmer Jack realized the big yellow quilt was expensive.": "die.face.2.fill",
 		// Close to one that aired on “Jeopardy!”
+		"Farmer Jack realized the big yellow quilt was expensive.": "die.face.2.fill",
 		
 		"Pack my box with five dozen liquor jugs.": "die.face.3.fill",
 		"Quick-blowing zephyrs vex daft Jim.": "die.face.4.fill",
 		
-		"Watch “Jeopardy!”, Alex Trebek’s fun TV quiz game.": "die.face.5.fill",
 		// Includes quotation marks. Keep them curly! https://practicaltypography.com/straight-and-curly-quotes.html
+		"Watch “Jeopardy!”, Alex Trebek’s fun TV quiz game.": "die.face.5.fill",
 		
 		Self.standard: "die.face.6.fill"
 	]
 }
-
-import UIKit
 
 struct Family {
 	let surname: String
